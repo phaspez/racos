@@ -5,16 +5,23 @@ import Textarea from "react-textarea-autosize";
 import { IoMdSend } from "react-icons/io";
 import { Spinner } from "flowbite-react";
 import { useChat } from "../managers/chatContext";
+import { runTextPrompt } from "../middleware/gemini";
 
 async function handleSendPrompt(prompt) {
-	return new Promise((resolve, reject) => {
-		setTimeout(() => {
-			resolve({
-				user: prompt,
-				bot: "This is a test response. Please implement your backend calls here.",
-			});
-		}, 1000);
-	});
+	let result = await runTextPrompt(prompt);
+	return {
+		user: prompt,
+		bot: result,
+	};
+
+	// return new Promise((resolve, reject) => {
+	// 	setTimeout(() => {
+	// 		resolve({
+	// 			user: prompt,
+	// 			bot: "This is a test response. Please implement your backend calls here.",
+	// 		});
+	// 	}, 1000);
+	// });
 }
 
 export default function PromptInput() {
@@ -30,6 +37,7 @@ export default function PromptInput() {
 			"An error has occurred. Please try again";
 		if (response) {
 			setInputText("");
+			console.log(response);
 			appendChatlog(response.user, response.bot);
 		}
 		setIsLoading(false);
