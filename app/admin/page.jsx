@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
-import UploadTable from "./UploadTable";
+import UploadTable from "./uploadTable";
 
 export default function Home() {
 	return (
