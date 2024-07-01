@@ -12,10 +12,10 @@ export default function ChatContainer() {
 	return (
 		<div
 			className={
-				chatlog.length === 0 ? "hidden " : "" + "w-full h-min px-20 mt-4"
+				chatlog.length === 0 ? "hidden " : "" + "w-full h-min px-0 mt-4"
 			}
 		>
-			<div className="grid grid-cols-1 gap-4 pt-10">
+			<div className="grid grid-cols-1 gap-4">
 				{chatlog.map((chat, index) => (
 					<ChatResponse response={chat} index={index} key={index} />
 				))}

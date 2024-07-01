@@ -53,7 +53,7 @@ export default function NavBar() {
 						label={
 							<Avatar
 								alt="User settings"
-								img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
+								img="/robot_wave_hand_profile.png"
 								rounded
 							/>
 						}
@@ -75,6 +75,7 @@ export default function NavBar() {
 
 				<Navbar.Collapse>
 					<Navbar.Link href="/chat">Chat</Navbar.Link>
+					<Navbar.Link href="/voice">Voice</Navbar.Link>
 					<Navbar.Link href="/faq">FAQ</Navbar.Link>
 				</Navbar.Collapse>
 			</Navbar>

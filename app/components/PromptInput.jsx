@@ -13,15 +13,6 @@ async function handleSendPrompt(prompt) {
 		user: prompt,
 		bot: result,
 	};
-
-	// return new Promise((resolve, reject) => {
-	// 	setTimeout(() => {
-	// 		resolve({
-	// 			user: prompt,
-	// 			bot: "This is a test response. Please implement your backend calls here.",
-	// 		});
-	// 	}, 1000);
-	// });
 }
 
 export default function PromptInput() {

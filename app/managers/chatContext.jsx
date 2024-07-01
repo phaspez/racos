@@ -8,6 +8,8 @@ export const ChatProvider = ({ children }) => {
 	const [chatlog, setChatlog] = useState([]);
 	const [inputText, setInputText] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
+	const [voiceAnswer, setVoiceAnswer] = useState("");
+	const [voiceQuestion, setVoiceQuestion] = useState("");
 
 	const appendChatlog = (userInput, botInput) => {
 		setChatlog((prev) => [
@@ -27,6 +29,10 @@ export const ChatProvider = ({ children }) => {
 		setInputText,
 		isLoading,
 		setIsLoading,
+		voiceAnswer,
+		setVoiceAnswer,
+		voiceQuestion,
+		setVoiceQuestion,
 	};
 
 	return (
