@@ -2,6 +2,8 @@
 import { streamText } from "ai";
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
 
+export const maxDuration = 60;
+
 export async function POST(req) {
 	"use server";
 
