@@ -14,7 +14,6 @@ export default function Home() {
 					<div className=" w-full h-30"></div>
 				</div>
 			</div>
-			{/* <VoiceInput /> */}
 		</ChatProvider>
 	);
 }
