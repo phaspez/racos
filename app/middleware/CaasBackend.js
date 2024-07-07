@@ -65,11 +65,11 @@ async function login({ email, password }) {
 	return data;
 }
 
-async function sendPrompt({ token, prompt }) {
-	const response = await axios.get(
+async function sendPrompt({ prompt }) {
+	const response = await axios.post(
 		process.env.BACKEND_URL + "/api/chat/prompt",
 		{
-			token: token,
+			//token: token,
 			prompt: prompt,
 		}
 	);
