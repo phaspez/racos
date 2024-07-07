@@ -33,7 +33,7 @@ export default function ChatResponse({ response, index }) {
 						<RiRobot2Fill />
 					</div>
 					<div className="bg-white shadow-md rounded-lg p-2">
-						<p className="text-left">
+						<div className="text-left">
 							{/* { <pre>{JSON.stringify(data, null, 2)}</pre>} */}
 							<Markdown
 								className={"p-0 text-wrap"}
@@ -42,7 +42,7 @@ export default function ChatResponse({ response, index }) {
 							>
 								{response.content}
 							</Markdown>
-						</p>
+						</div>
 					</div>
 				</div>
 			)}
