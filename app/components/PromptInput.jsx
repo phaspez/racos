@@ -4,35 +4,44 @@ import { useEffect, useRef } from "react";
 import Textarea from "react-textarea-autosize";
 import { IoMdSend } from "react-icons/io";
 import { Spinner } from "flowbite-react";
-import { useChat } from "../managers/chatContext";
-import { runTextPrompt } from "../middleware/gemini";
+//import { useChat } from "../managers/chatContext";
+// import { runTextPrompt } from "../middleware/gemini";
+// import { useChat } from "ai/react";
 
-async function handleSendPrompt(prompt) {
-	let result = await runTextPrompt(prompt);
-	return {
-		user: prompt,
-		bot: result,
-	};
-}
+// async function handleSendPrompt(prompt) {
+// 	//let result = await runTextPrompt(prompt);
+// 	return {
+// 		user: prompt,
+// 		bot: "", //result,
+// 	};
+// }
 
-export default function PromptInput() {
-	const { inputText, setInputText, appendChatlog, isLoading, setIsLoading } =
-		useChat();
+export default function PromptInput({
+	handlePromptSubmit,
+	input,
+	handleInputChange,
+}) {
+	//const { inputText, setInputText, appendChatlog, isLoading, setIsLoading } =
+	//	useChat();
+	//const { messages, input, handleInputChange, handleSubmit } = useChat();
 	const buttonRef = useRef(null);
 	//const [inputValue, setInputValue] = useState("");
 	//const [isLoading, setIsLoading] = useState(false);
 
-	const handlePrompt = async () => {
-		let response =
-			(await handleSendPrompt(inputText)) ||
-			"An error has occurred. Please try again";
-		if (response) {
-			setInputText("");
-			console.log(response);
-			appendChatlog(response.user, response.bot);
-		}
-		setIsLoading(false);
-	};
+	// const handlePrompt = async (ev) => {
+	// 	// let response =
+	// 	// 	(await handleSendPrompt(inputText)) ||
+	// 	// 	"An error has occurred. Please try again";
+	// 	// if (response) {
+	// 	// 	setInputText("");
+	// 	// 	console.log(response);
+	// 	// 	appendChatlog(response.user, response.bot);
+	// 	// }
+	// 	ev.preventDefault();
+	// 	handleSubmit();
+	// 	//setIsLoading(false);
+	// 	console.log(messages);
+	// };
 
 	useEffect(() => {
 		const handleKeyDown = (event) => {
@@ -52,54 +61,72 @@ export default function PromptInput() {
 	}, []);
 
 	return (
-		<div className="fixed w-full bottom-5 py-1 pt-10 -mb-5 bg-gradient-to-t text-black from-white to-transparent">
-			<div className="lg:px-24 md:px-16 px-4">
-				<div className="flex px-2 text-center text-wrap overflow-hidden align-middle justify-center">
-					<Textarea
-						value={inputText}
-						tabIndex={0}
-						rows={1}
-						id="prompt-input"
-						placeholder="Bạn muốn hỏi gì?"
-						disabled={isLoading}
-						spellCheck={true}
-						className="rounded-lg resize-none p-4 my-2 bg-gray-200 dark:bg-gray-700  grow overflow-visible"
-						onChange={(e) => {
-							e.preventDefault();
-							let newInputValue = e.target.value;
-							setInputText(newInputValue);
-						}}
-					/>
+		<form onSubmit={handlePromptSubmit} className="flex flex-col items-center">
+			<input
+				type="text"
+				value={input}
+				onChange={handleInputChange}
+				className="border rounded px-2 py-1"
+				placeholder="Type your message"
+			/>
+			<button
+				type="submit"
+				className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
+			>
+				Send
+			</button>
+		</form>
 
-					<div className="relative text-xl flex flex-col px-2 overflow-hidden max-h-60 bg-background">
-						{isLoading ? (
-							<div className="p-2 mt-2">
-								<Spinner aria-label="Default status example" size={"lg"} />
-							</div>
-						) : (
-							<button
-								className="rounded-md bg-blue-700 hover:bg-blue-800 text-white p-2 mt-2 disabled:bg-gray-500 disabled:hover:bg-gray-600"
-								style={{ alignSelf: "flex-start" }}
-								type="submit"
-								id="submit-prompt"
-								disabled={inputText.length === 0}
-								ref={buttonRef}
-								onClick={() => {
-									handlePrompt();
+		// <div className="fixed w-full bottom-5 py-1 pt-10 -mb-5 bg-gradient-to-t text-black from-white to-transparent">
+		// 	<div className="lg:px-24 md:px-16 px-4">
+		// 		<form onSubmit={handlePromptSubmit}>
+		// 			<div className="flex px-2 text-center text-wrap overflow-hidden align-middle justify-center">
+		// 				<Textarea
+		// 					value={input}
+		// 					tabIndex={0}
+		// 					rows={1}
+		// 					id="prompt-input"
+		// 					placeholder="Bạn muốn hỏi gì?"
+		// 					//disabled={isLoading}
+		// 					spellCheck={true}
+		// 					className="rounded-lg resize-none p-4 my-2 bg-gray-200 dark:bg-gray-700  grow overflow-visible"
+		// 					// onChange={(e) => {
+		// 					// 	e.preventDefault();
+		// 					// 	let newInputValue = e.target.value;
+		// 					// 	handleInputChange(e);
+		// 					// }}
+		// 					onChange={handleInputChange}
+		// 				/>
 
-									setIsLoading(true);
-								}}
-							>
-								<IoMdSend />
-							</button>
-						)}
-					</div>
-				</div>
-				<p className="text-xs p-0 m-0 text-center">
-					Shift + Enter để gửi. Thông tin có thể đưa ra một cách không chính
-					xác, hãy xác minh câu trả lời của AI.
-				</p>
-			</div>
-		</div>
+		// 				<div className="relative text-xl flex flex-col px-2 overflow-hidden max-h-60 bg-background">
+		// 					{false ? ( // is loading
+		// 						<div className="p-2 mt-2">
+		// 							<Spinner aria-label="Default status example" size={"lg"} />
+		// 						</div>
+		// 					) : (
+		// 						<button
+		// 							className="rounded-md bg-blue-700 hover:bg-blue-800 text-white p-2 mt-2 disabled:bg-gray-500 disabled:hover:bg-gray-600"
+		// 							style={{ alignSelf: "flex-start" }}
+		// 							type="submit"
+		// 							id="submit-prompt"
+		// 							//disabled={input ? input.length === 0 : true}
+		// 							ref={buttonRef}
+		// 							// onClick={(ev) => {
+		// 							// 	ev.preventDefault();
+		// 							// 	handlePromptSubmit(ev);
+		// 							// }}
+		// 						>
+		// 							<IoMdSend />
+		// 						</button>
+		// 					)}
+		// 				</div>
+		// 			</div>
+		// 		</form>
+		// 		<p className="text-xs p-0 m-0 text-center">
+		// 			Shift + Enter để gửi. Thông tin có thể đưa ra một cách không chính
+		// 			xác, hãy xác minh câu trả lời của AI.
+		// 		</p>
+		// 	</div>
+		// </div>
 	);
 }

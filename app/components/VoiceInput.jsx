@@ -2,33 +2,41 @@
 
 import { IoMdSend } from "react-icons/io";
 import { Button, Spinner } from "flowbite-react";
-import { useSpeechToText } from "../managers/textToSpeech";
+import { useSpeechToText } from "../managers/speechToText";
 import { useState } from "react";
 import { BiSolidMicrophone } from "react-icons/bi";
 import { IoIosClose } from "react-icons/io";
 import { runTextPrompt } from "../middleware/gemini";
 import { useChat } from "../managers/chatContext";
+import { useTextToSpeech } from "../managers/textToSpeech";
 
-async function handleSendPrompt(prompt) {
-	let result = await runTextPrompt(prompt);
-	console.log(result);
-	return {
-		user: prompt,
-		bot: result,
-	};
-}
+// async function handleSendPrompt(prompt) {
+// 	// let result = await runTextPrompt(prompt);
+// 	// console.log(result);
+// 	// return {
+// 	// 	user: prompt,
+// 	// 	bot: result,
+// 	// };
+// }
 
-export default function VoiceInput() {
-	const [textInput, setTextInput] = useState("");
-	const {
-		voiceAnswer,
-		setVoiceAnswer,
-		setVoiceQuestion,
-		isLoading,
-		setIsLoading,
-	} = useChat();
+export default function VoiceInput({
+	textInput,
+	setTextInput,
+	submit,
+	isLoading,
+}) {
+	//const [textInput, setTextInput] = useState("");
+	// const {
+	// 	voiceAnswer,
+	// 	setVoiceAnswer,
+	// 	setVoiceQuestion,
+	// 	isLoading,
+	// 	setIsLoading,
+	// 	appendVoicelog,
+	// } = useChat();
 	const { isListening, transcript, startListening, stopListening } =
 		useSpeechToText({ continuous: true, lang: "vi-VN" });
+	//const { speakText } = useTextToSpeech({ lang: "vi-VN" });
 
 	const startStopListening = async () => {
 		if (isListening) {
@@ -36,14 +44,18 @@ export default function VoiceInput() {
 				? textInput +
 				  (transcript.length ? (textInput.length ? " " : "") + transcript : "")
 				: textInput;
-			setIsLoading(true);
-			let res = await handleSendPrompt(text);
-			if (res) {
-				setVoiceAnswer(res.bot);
-				setVoiceQuestion(res.user);
-			}
+			//setIsLoading(true);
+			// let res = await handleSendPrompt(text);
+			// if (res) {
+			// 	appendVoicelog(res.user, res.bot);
+			// 	// setVoiceAnswer(res.bot);
+			// 	// setVoiceQuestion(res.user);
+			// 	speakText(res.bot);
+			// }
+			console.log(textInput);
+			submit({ role: "user", content: text });
 
-			setIsLoading(false);
+			//setIsLoading(false);
 			stopVoiceInput();
 		} else {
 			startListening();
@@ -58,7 +70,7 @@ export default function VoiceInput() {
 				prevVal +
 				(transcript.length ? (prevVal.length ? " " : "") + transcript : "")
 		);
-		console.log("svi: ", textInput);
+		//console.log("svi: ", textInput);
 	};
 
 	return (

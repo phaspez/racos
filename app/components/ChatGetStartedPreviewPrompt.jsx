@@ -1,14 +1,19 @@
 "use client";
 
-import { useChat } from "../managers/chatContext";
+//import { useChat } from "../managers/chatContext";
 import { CiChat1 } from "react-icons/ci";
+import { useChat } from "ai/react";
 
 export function ChatGetStartedPreviewPrompt({ prompt }) {
-	const { setInputText } = useChat();
+	//const { setInputText } = useChat();
+	// const { messages, input, setInput, handleInputChange, handleSubmit } =
+	// 	useChat();
 
 	const handleClick = () => {
-		setInputText(prompt);
+		//setInputText(prompt);
+		//setInput(prompt);
 		document.getElementById("prompt-input").focus();
+		//handleInputChange()
 	};
 
 	return (

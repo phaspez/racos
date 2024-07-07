@@ -10,9 +10,20 @@ export const ChatProvider = ({ children }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [voiceAnswer, setVoiceAnswer] = useState("");
 	const [voiceQuestion, setVoiceQuestion] = useState("");
+	const [voicelog, setVoicelog] = useState([]);
 
 	const appendChatlog = (userInput, botInput) => {
 		setChatlog((prev) => [
+			...prev,
+			{
+				user: userInput,
+				bot: botInput,
+			},
+		]);
+	};
+
+	const appendVoicelog = (userInput, botInput) => {
+		setVoicelog((prev) => [
 			...prev,
 			{
 				user: userInput,
@@ -33,6 +44,8 @@ export const ChatProvider = ({ children }) => {
 		setVoiceAnswer,
 		voiceQuestion,
 		setVoiceQuestion,
+		voicelog, 
+		appendVoicelog,
 	};
 
 	return (

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import {
 	Navbar,
 	NavbarBrand,
@@ -10,6 +11,8 @@ import {
 	DropdownDivider,
 	Avatar,
 } from "flowbite-react";
+import { getUser } from "../middleware/CaasBackend";
+import { useEffect, useState } from "react";
 
 const customTheme = {
 	root: {
@@ -33,6 +36,8 @@ const customTheme = {
 };
 
 export default function NavBar() {
+	const [user, setUser] = useState(null);
+
 	return (
 		<nav className="sticky top-0 z-10">
 			<Navbar
@@ -42,6 +47,12 @@ export default function NavBar() {
 				theme={customTheme}
 			>
 				<NavbarBrand href="/">
+					<Image
+						width="32"
+						height="32"
+						src="https://img.icons8.com/external-basicons-color-edtgraphics/50/external-Drop-abstract-basicons-color-edtgraphics.png"
+						alt="icons"
+					/>
 					<span className="self-center whitespace-nowrap text-xl font-semibold text-highlights">
 						CAAS
 					</span>

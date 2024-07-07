@@ -1,79 +1,75 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+/* options = {
+    text: String,
+    lang: String, // e.g., 'en-US', 'es-ES'
+} */
 
-export const useSpeechToText = (options) => {
-	const [isListening, setIsListening] = useState(false);
-	const [transcript, setTranscript] = useState("");
-	const [isSpeechSupported, setIsSpeechSupported] = useState(false);
-	const recognitionRef = useRef(null);
+export const useTextToSpeech = (options) => {
+    let utteranceRef = useRef(null);
+    let speechSynthesisRef = useRef(null);
+    const [isSpeaking, setIsSpeaking] = useState(false);
+    const [voices, setVoices] = useState([]);
 
-	useEffect(() => {
-		console.log(window);
+    useEffect(() => {
+        speechSynthesisRef.current = window.speechSynthesis;
 
-		if (!("webkitSpeechRecognition" in window)) {
-			setIsSpeechSupported("webkitSpeechRecognition" in window);
-			alert("Trình duyệt này không hỗ trợ chuyển giọng nói thành văn bản");
-			//console.error("Speech recognition is not supported in this browser");
-			return;
-		}
+        const loadVoices = () => {
+            const voicesList = speechSynthesisRef.current.getVoices();
+            setVoices(voicesList);
+            console.log(voicesList);
+        };
 
-		recognitionRef.current = new window.webkitSpeechRecognition();
-		const recognition = recognitionRef.current;
-		recognition.interimResults = options.interimResults || true;
-		recognition.lang = options.lang || "en-US";
-		recognition.continuous = options.continuous || false;
+        // Load voices if they're available
+        if (speechSynthesisRef.current.onvoiceschanged !== undefined) {
+            speechSynthesisRef.current.onvoiceschanged = loadVoices;
+        }
+        loadVoices();
+    }, []);
 
-		if ("webkitSpeechGrammarList" in window) {
-			const grammar =
-				"#JSGF V1.0; grammar punctuation; public <punctuation> = period | comma | exclamation | question | colon";
-			const speechRecognitionList = new window.webkitSpeechGrammarList();
-			speechRecognitionList.addFromString(grammar, 1);
-			recognition.grammars = speechRecognitionList;
-		}
+    const speak = () => {
+        speechSynthesisRef.current.speak(utteranceRef.current);
+        setIsSpeaking(true);
+    };
 
-		recognition.onresult = (event) => {
-			let text = "";
-			for (let i = 0; i < event.results.length; i++) {
-				text += event.results[i][0].transcript;
-			}
+    const speakText = (text) => {
+        let utt = new window.SpeechSynthesisUtterance(stripMarkdown(text));
+        if (options && options.lang) {
+            utt.lang = options.lang;
+        }
+        
+        const selectedVoice = voices.find(voice => voice.lang === utt.lang);
+        if (selectedVoice) {
+            utt.voice = selectedVoice;
+        } else {
+            console.warn(`No voice found for lang: ${utt.lang}`);
+        }
 
-			setTranscript(text);
-		};
+        console.log(`Speaking with voice: ${utt.voice ? utt.voice.name : 'default'}, lang: ${utt.lang}`);
+        cancel();
+        speechSynthesisRef.current.speak(utt);
+    };
 
-		recognition.onerror = (event) => {
-			console.error("Speech recognition error", event.error);
-		};
+    const stripMarkdown = (markdown) => {
+        return markdown
+            .replace(/[#*_\-~`>[\]()]/g, '') // Remove Markdown characters
+            .replace(/!\[.*\]\(.*\)/g, '')   // Remove images
+            .replace(/\[(.*?)\]\(.*\)/g, '$1') // Remove links but keep the text
+            .replace(/\n/g, ' ') // Replace newlines with spaces
+            .replace(/\s{2,}/g, ' ') // Replace multiple spaces with a single space
+            .trim();
+    };
 
-		recognition.onend = () => {
-			setIsListening(false);
-			setTranscript("");
-		};
+    const pause = () => {
+        speechSynthesisRef.current.pause();
+    };
 
-		return () => {
-			recognition.stop();
-		};
-	}, []);
+    const cancel = () => {
+        speechSynthesisRef.current.cancel();
+    };
 
-	const startListening = () => {
-		if (recognitionRef.current && !isListening) {
-			recognitionRef.current.start();
-			setIsListening(true);
-		}
-	};
-
-	const stopListening = () => {
-		if (recognitionRef.current && isListening) {
-			recognitionRef.current.stop();
-			setIsListening(false);
-		}
-	};
-
-	return {
-		isListening,
-		startListening,
-		stopListening,
-		transcript,
-		isSpeechSupported,
-	};
+    return {
+        speak, pause, cancel, speakText
+    };
 };
