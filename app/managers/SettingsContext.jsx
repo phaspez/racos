@@ -9,12 +9,25 @@ export const SettingsProvider = ({ children }) => {
 	const ISSERVER = typeof window === "undefined";
 	const { theme, setTheme } = useTheme();
 	const [mounted, setMounted] = useState(false);
+
+	const checkItem = (item, cond) => {
+		try {
+			if (ISSERVER) {
+				return localStorage.getItem(item) === (cond || "true");
+			}
+			return false;
+		} catch (error) {
+			console.log("Error: ", error);
+			return false;
+		}
+	};
+
 	const [isDarkMode, setIsDarkMode] = useState(theme === "dark" || false);
 	const [isChatAutoSpeak, setIsChatAutoSpeak] = useState(
-		ISSERVER ? localStorage.getItem("chatAutoSpeak") === "true" : false
+		checkItem("chatAutoSpeak")
 	);
 	const [isVoiceAutoSpeak, setIsVoiceAutoSpeak] = useState(
-		ISSERVER ? localStorage.getItem("voiceAutoSpeak") === "true" : true
+		checkItem("voiceAutoSpeak")
 	);
 	// fast: "models/gemini-1.5-flash-latest"
 	// slow: "models/gemini-1.5-pro-latest"
@@ -30,9 +43,9 @@ export const SettingsProvider = ({ children }) => {
 		if (typeof window === "undefined") {
 			return;
 		}
-		setIsDarkMode(localStorage.getItem("theme") === "dark");
-		setIsChatAutoSpeak(localStorage.getItem("chatAutoSpeak") === "true");
-		setIsVoiceAutoSpeak(localStorage.getItem("voiceAutoSpeak") === "true");
+		setIsDarkMode(checkItem("theme", "dark"));
+		setIsChatAutoSpeak(checkItem("chatAutoSpeak"));
+		setIsVoiceAutoSpeak(checkItem("voiceAutoSpeak"));
 		//console.log("init: ", localStorage.getItem("theme"));
 		//console.log(localStorage.getItem("theme") === "dark");
 		//}
