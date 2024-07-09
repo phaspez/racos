@@ -6,7 +6,12 @@ module.exports = {
 		"./components/**/*.{js,ts,jsx,tsx,mdx}",
 		"./app/**/*.{js,ts,jsx,tsx,mdx}",
 		"node_modules/flowbite-react/lib/esm/**/*.js",
+		"./node_modules/flowbite-react/lib/esm/**/*.js",
+		"./node_modules/flowbite-react/lib/**/*.js",
 		"./public/**/*.html",
+		//"./src/**/*.{html,jsx,tsx}",
+		// you can either add all styles
+		//"./node_modules/@rewind-ui/core/dist/theme/styles/*.js",
 	],
 	theme: {
 		extend: {
@@ -17,6 +22,13 @@ module.exports = {
 			},
 		},
 	},
-	plugins: [require("flowbite/plugin")],
+	daisyui: {
+		themes: ["light", "dark"],
+	},
+
+	plugins: [
+		//require("flowbite/plugin"),
+		require("daisyui"),
+	],
 	darkMode: "class",
 };

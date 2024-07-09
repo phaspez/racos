@@ -1,20 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Textarea from "react-textarea-autosize";
-import { IoMdSend } from "react-icons/io";
-import { Spinner } from "flowbite-react";
-//import { useChat } from "../managers/chatContext";
-// import { runTextPrompt } from "../middleware/gemini";
-// import { useChat } from "ai/react";
-
-// async function handleSendPrompt(prompt) {
-// 	//let result = await runTextPrompt(prompt);
-// 	return {
-// 		user: prompt,
-// 		bot: "", //result,
-// 	};
-// }
 
 export default function PromptInput({
 	handlePromptSubmit,

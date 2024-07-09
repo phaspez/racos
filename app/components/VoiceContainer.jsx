@@ -9,6 +9,7 @@ import { Spinner } from "flowbite-react";
 import { useEffect, useRef } from "react";
 import ChatGetStarted from "./VoiceGetStarted";
 import VoiceInput from "./VoiceInput";
+import { useSettings } from "../managers/SettingsContext";
 
 export default function VoiceContainer() {
 	const {
@@ -21,43 +22,7 @@ export default function VoiceContainer() {
 		isLoading,
 	} = useChat();
 	const buttonRef = useRef(null);
-
-	// const [textInput, setTextInput] = useState("");
-	// const { isListening, transcript, startListening, stopListening } =
-	// 	useSpeechToText({ continuous: true, lang: "vi-VN" });
-	// const { speakText } = useTextToSpeech({ lang: "vi-VN" });
-
-	// const startStopListening = async () => {
-	// 	if (isListening) {
-	// 		let text = isListening
-	// 			? textInput +
-	// 			  (transcript.length ? (textInput.length ? " " : "") + transcript : "")
-	// 			: textInput;
-	// 		setIsLoading(true);
-	// 		let res = await handleSendPrompt(text);
-	// 		if (res) {
-	// 			appendVoicelog(res.user, res.bot);
-	// 			// setVoiceAnswer(res.bot);
-	// 			// setVoiceQuestion(res.user);
-	// 			speakText(res.bot);
-	// 		}
-
-	// 		setIsLoading(false);
-	// 		stopVoiceInput();
-	// 	} else {
-	// 		startListening();
-	// 		setTextInput("");
-	// 	}
-	// };
-
-	// const stopVoiceInput = () => {
-	// 	stopListening();
-	// 	setTextInput(
-	// 		(prevVal) =>
-	// 			prevVal +
-	// 			(transcript.length ? (prevVal.length ? " " : "") + transcript : "")
-	// 	);
-	// };
+	const { isVoiceAutoSpeak } = useSettings();
 
 	return (
 		<>
@@ -65,7 +30,11 @@ export default function VoiceContainer() {
 				{messages.length === 0 ? <ChatGetStarted /> : null}
 				<div className="flex flex-col w-full pt-6 pb-24 mx-auto stretch px-10">
 					{messages.map((m) => (
-						<ChatResponse response={m} key={m.id} />
+						<ChatResponse
+							response={m}
+							key={m.id}
+							autoSpeak={isVoiceAutoSpeak}
+						/>
 					))}
 				</div>
 			</div>

@@ -74,14 +74,14 @@ export default function VoiceInput({
 	};
 
 	return (
-		<div className="fixed w-full bottom-0 bg-gradient-to-t text-black from-white to-transparent">
+		<div className="fixed w-full bottom-0 bg-gradient-to-t from-white dark:dark:from-slate-800 to-transparent">
 			<div className="grid px-2 text-center text-wrap overflow-hidden place-items-center">
 				<div>
 					<p
 						className={
 							!(isListening && textInput.length == 0)
 								? "hidden"
-								: "text-lg text-opacity-60 font-light bg-white rounded-lg shadow-md"
+								: "text-lg text-opacity-60 font-light bg-white dark:bg-black dark:text-white rounded-lg shadow-md"
 						}
 					>
 						{isListening

@@ -17,18 +17,18 @@ export default function ChatGetStarted({ setInput }) {
 	return (
 		<>
 			<div
-				className="bg-white bg-opacity-60 rounded-lg h-min px-2 md:mx-6 lg:mx-10 py-6 my-4 md:mt-10 lg:mt-10 shadow-xl \
-					relative overflow-clip"
+				className="bg-white dark:bg-gray-500 bg-opacity-60 rounded-lg h-min px-2 md:mx-6 lg:mx-10 py-6 my-4 md:mt-10 lg:mt-10 shadow-xl \
+					relative overflow-clip -z-0"
 			>
 				<Image
 					src="/robot_stand_and_look.png"
 					width={300}
 					height={400}
-					className="absolute right-0 bottom-0 -z-10"
+					className="absolute right-0 bottom-0 -z-10 opacity-40"
 					alt="robot image"
 				/>
 				<h1 className="text-highlights text-extra-large">Xin chào!</h1>
-				<h1 className=" text-gray-600 text-extra-large opacity-30">
+				<h1 className=" text-gray-600 dark:text-gray-300 text-extra-large opacity-30">
 					Tôi có thể giúp gì cho bạn?
 				</h1>
 				<div className="">

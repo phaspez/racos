@@ -2,17 +2,10 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import {
-	Navbar,
-	NavbarBrand,
-	Dropdown,
-	DropdownItem,
-	DropdownHeader,
-	DropdownDivider,
-	Avatar,
-} from "flowbite-react";
-import { getUser } from "../middleware/CaasBackend";
 import { useEffect, useState } from "react";
+import { useSettings } from "../managers/SettingsContext";
+import { FaSun } from "react-icons/fa";
+import { FaMoon } from "react-icons/fa6";
 
 const customTheme = {
 	root: {
@@ -36,60 +29,80 @@ const customTheme = {
 };
 
 export default function NavBar() {
-	const [user, setUser] = useState(null);
+	const { isDarkMode, setIsDarkMode } = useSettings();
 
 	return (
 		<nav className="sticky top-0 z-10">
-			<Navbar
-				fluid
-				rounded
-				className="list-none backdrop-blur-md"
-				theme={customTheme}
-			>
-				<NavbarBrand href="/">
-					<Image
-						width="32"
-						height="32"
-						src="https://img.icons8.com/external-basicons-color-edtgraphics/50/external-Drop-abstract-basicons-color-edtgraphics.png"
-						alt="icons"
-					/>
-					<span className="self-center whitespace-nowrap text-xl font-semibold text-highlights">
-						CAAS
-					</span>
-				</NavbarBrand>
-				<div className="flex md:order-2">
-					<Dropdown
-						arrowIcon={false}
-						inline
-						label={
-							<Avatar
-								alt="User settings"
-								img="/robot_wave_hand_profile.png"
-								rounded
+			<div className="navbar bg-white dark:bg-slate-600 text-black dark:text-white backdrop-blur-md bg-opacity-50">
+				<div className="navbar-start">
+					<div className="dropdown">
+						<div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								className="h-5 w-5"
+								fill="none"
+								viewBox="0 0 24 24"
+								stroke="currentColor"
+							>
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth="2"
+									d="M4 6h16M4 12h8m-8 6h16"
+								/>
+							</svg>
+						</div>
+						<ul
+							tabIndex={0}
+							className="menu menu-md dropdown-content bg-white dark:bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+						>
+							<li className="">
+								<Link href="/chat">Chat</Link>
+							</li>
+							<li className="">
+								<Link href="/voice">Voice</Link>
+							</li>
+							<li className="">
+								<Link href="/settings">Settings</Link>
+							</li>
+						</ul>
+					</div>
+					<Link href="/">
+						<div className="flex p-2 hover:bg-gray-300 hover:dark:bg-gray-700 rounded-md transition-all duration-150">
+							<Image
+								width="32"
+								height="32"
+								src="https://img.icons8.com/external-basicons-color-edtgraphics/50/external-Drop-abstract-basicons-color-edtgraphics.png"
+								alt="icons"
 							/>
-						}
-					>
-						<DropdownHeader>
-							<span className="block text-sm">Anonymous</span>
-							<span className="block truncate text-sm font-medium">
-								name@mail.com
+							<span className="self-center whitespace-nowrap text-xl font-semibold text-highlights">
+								CAAS
 							</span>
-						</DropdownHeader>
-						<DropdownItem>Settings</DropdownItem>
-						<Link href={"/admin"}>
-							<DropdownItem>Admin</DropdownItem>
-						</Link>
-						<DropdownItem>Sign out</DropdownItem>
-					</Dropdown>
-					<Navbar.Toggle />
+						</div>
+					</Link>
 				</div>
-
-				<Navbar.Collapse>
-					<Navbar.Link href="/chat">Chat</Navbar.Link>
-					<Navbar.Link href="/voice">Voice</Navbar.Link>
-					<Navbar.Link href="/faq">FAQ</Navbar.Link>
-				</Navbar.Collapse>
-			</Navbar>
+				<div className="navbar-center hidden lg:flex">
+					<ul className="menu menu-horizontal px-1">
+						<li>
+							<Link href="/chat">Chat</Link>
+						</li>
+						<li>
+							<Link href="/voice">Voice</Link>
+						</li>
+						<li>
+							<Link href="/settings">Settings</Link>
+						</li>
+					</ul>
+				</div>
+				<div className="navbar-end">
+					<button
+						className="btn btn-outline"
+						onClick={() => setIsDarkMode(!isDarkMode)}
+					>
+						{isDarkMode ? <FaSun /> : <FaMoon />}
+					</button>
+				</div>
+			</div>
 		</nav>
 	);
 }
