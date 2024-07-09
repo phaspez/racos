@@ -27,7 +27,7 @@ export const SettingsProvider = ({ children }) => {
 	}, []);
 
 	useEffect(() => {
-		if (typeof window !== "undefined") {
+		if (typeof window === "undefined") {
 			return;
 		}
 		setIsDarkMode(localStorage.getItem("theme") === "dark");
