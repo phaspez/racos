@@ -6,21 +6,15 @@ import { useTheme } from "next-themes";
 const SettingsContext = createContext();
 
 export const SettingsProvider = ({ children }) => {
-	const getInitialTheme = () => {
-		//if (typeof window !== "undefined") {
-		const savedTheme = localStorage.getItem("theme");
-		return savedTheme === "dark";
-		//}
-		//return false; // Default to light mode if no value in localStorage
-	};
+	const ISSERVER = typeof window === "undefined";
 	const { theme, setTheme } = useTheme();
 	const [mounted, setMounted] = useState(false);
 	const [isDarkMode, setIsDarkMode] = useState(theme === "dark" || false);
 	const [isChatAutoSpeak, setIsChatAutoSpeak] = useState(
-		localStorage.getItem("chatAutoSpeak") === "true" || false
+		ISSERVER ? localStorage.getItem("chatAutoSpeak") === "true" : false
 	);
 	const [isVoiceAutoSpeak, setIsVoiceAutoSpeak] = useState(
-		localStorage.getItem("voiceAutoSpeak") === "true" || true
+		ISSERVER ? localStorage.getItem("voiceAutoSpeak") === "true" : true
 	);
 	// fast: "models/gemini-1.5-flash-latest"
 	// slow: "models/gemini-1.5-pro-latest"
@@ -33,7 +27,9 @@ export const SettingsProvider = ({ children }) => {
 	}, []);
 
 	useEffect(() => {
-		//if (typeof window !== "undefined") {
+		if (typeof window !== "undefined") {
+			return;
+		}
 		setIsDarkMode(localStorage.getItem("theme") === "dark");
 		setIsChatAutoSpeak(localStorage.getItem("chatAutoSpeak") === "true");
 		setIsVoiceAutoSpeak(localStorage.getItem("voiceAutoSpeak") === "true");
