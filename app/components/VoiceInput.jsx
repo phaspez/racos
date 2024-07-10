@@ -3,12 +3,9 @@
 import { IoMdSend } from "react-icons/io";
 import { Button, Spinner } from "flowbite-react";
 import { useSpeechToText } from "../managers/speechToText";
-import { useState } from "react";
+import { useRef, useEffect } from "react";
 import { BiSolidMicrophone } from "react-icons/bi";
 import { IoIosClose } from "react-icons/io";
-import { runTextPrompt } from "../middleware/gemini";
-import { useChat } from "../managers/chatContext";
-import { useTextToSpeech } from "../managers/textToSpeech";
 
 // async function handleSendPrompt(prompt) {
 // 	// let result = await runTextPrompt(prompt);
@@ -37,6 +34,7 @@ export default function VoiceInput({
 	const { isListening, transcript, startListening, stopListening } =
 		useSpeechToText({ continuous: true, lang: "vi-VN" });
 	//const { speakText } = useTextToSpeech({ lang: "vi-VN" });
+	const buttonRef = useRef(null);
 
 	const startStopListening = async () => {
 		if (isListening) {
@@ -52,7 +50,7 @@ export default function VoiceInput({
 			// 	// setVoiceQuestion(res.user);
 			// 	speakText(res.bot);
 			// }
-			console.log(textInput);
+			//console.log(textInput);
 			submit({ role: "user", content: text });
 
 			//setIsLoading(false);
@@ -70,8 +68,24 @@ export default function VoiceInput({
 				prevVal +
 				(transcript.length ? (prevVal.length ? " " : "") + transcript : "")
 		);
-		//console.log("svi: ", textInput);
 	};
+
+	useEffect(() => {
+		const handleKeyPress = (event) => {
+			if (event.key === " " || event.key === "Enter") {
+				event.preventDefault();
+				if (buttonRef.current) {
+					buttonRef.current.click();
+				}
+			}
+		};
+
+		document.addEventListener("keydown", handleKeyPress);
+
+		return () => {
+			document.removeEventListener("keydown", handleKeyPress);
+		};
+	}, []);
 
 	return (
 		<div className="fixed w-full bottom-0 bg-gradient-to-t from-white dark:dark:from-slate-800 to-transparent">
@@ -112,6 +126,7 @@ export default function VoiceInput({
 					<Button
 						disabled={isLoading}
 						onClick={startStopListening}
+						ref={buttonRef}
 						color={isListening ? "red" : "blue"}
 						className="rounded-full w-20 m-1 aspect-square text-center align-middle"
 					>
@@ -127,6 +142,18 @@ export default function VoiceInput({
 							)}
 						</div>
 					</Button>
+				</div>
+				<div className="p-1">
+					{" "}
+					<p className="text-xs p-0 m-0 text-center gap-2">
+						<span className="hidden md:inline-block px-1">
+							<kbd className="kbd">Enter</kbd> hoặc{" "}
+							<kbd className="kbd">Space</kbd>
+							{" để ghi âm hoặc gửi."}
+						</span>
+						Thông tin có thể đưa ra không chính xác, hãy xác minh câu trả lời
+						của AI.
+					</p>
 				</div>
 			</div>
 		</div>

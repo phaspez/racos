@@ -6,6 +6,9 @@ import { useEffect, useState } from "react";
 import { useSettings } from "../managers/SettingsContext";
 import { FaSun } from "react-icons/fa";
 import { FaMoon } from "react-icons/fa6";
+import { FaMicrophone } from "react-icons/fa";
+import { IoChatbox } from "react-icons/io5";
+import { IoMdSettings } from "react-icons/io";
 
 const customTheme = {
 	root: {
@@ -56,14 +59,23 @@ export default function NavBar() {
 							tabIndex={0}
 							className="menu menu-md dropdown-content bg-white dark:bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
 						>
-							<li className="">
-								<Link href="/chat">Chat</Link>
+							<li>
+								<Link href="/chat">
+									<IoChatbox />
+									Chat
+								</Link>
 							</li>
-							<li className="">
-								<Link href="/voice">Voice</Link>
+							<li>
+								<Link href="/voice">
+									<FaMicrophone />
+									Voice
+								</Link>
 							</li>
-							<li className="">
-								<Link href="/settings">Settings</Link>
+							<li>
+								<Link href="/settings">
+									<IoMdSettings />
+									Cài đặt
+								</Link>
 							</li>
 						</ul>
 					</div>
@@ -84,13 +96,22 @@ export default function NavBar() {
 				<div className="navbar-center hidden lg:flex">
 					<ul className="menu menu-horizontal px-1">
 						<li>
-							<Link href="/chat">Chat</Link>
+							<Link href="/chat">
+								<IoChatbox />
+								Chat
+							</Link>
 						</li>
 						<li>
-							<Link href="/voice">Voice</Link>
+							<Link href="/voice">
+								<FaMicrophone />
+								Voice
+							</Link>
 						</li>
 						<li>
-							<Link href="/settings">Settings</Link>
+							<Link href="/settings">
+								<IoMdSettings />
+								Cài đặt
+							</Link>
 						</li>
 					</ul>
 				</div>

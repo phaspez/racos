@@ -93,10 +93,10 @@ export default function ChatContainer() {
 					<p className="text-xs p-0 m-0 text-center gap-2">
 						<span className="hidden md:inline-block px-1">
 							<kbd className="kbd">Shift</kbd>+<kbd className="kbd">Enter</kbd>
-							{" Để gửi"}
+							{" để gửi."}
 						</span>
-						Thông tin có thể đưa ra một cách không chính xác, hãy xác minh câu
-						trả lời của AI.
+						Thông tin có thể đưa ra không chính xác, hãy xác minh câu trả lời
+						của AI.
 					</p>
 				</div>
 			</div>

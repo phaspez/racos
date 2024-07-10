@@ -2,25 +2,33 @@
 
 import { useState, useEffect, useContext, createContext } from "react";
 import { useTheme } from "next-themes";
+import { setCookie, getCookie, hasCookie } from "cookies-next";
 
 const SettingsContext = createContext();
 
 export const SettingsProvider = ({ children }) => {
-	const ISSERVER = typeof window === "undefined";
 	const { theme, setTheme } = useTheme();
 	const [mounted, setMounted] = useState(false);
 
 	const checkItem = (item, cond) => {
-		try {
-			if (ISSERVER) {
-				return localStorage.getItem(item) === (cond || "true");
-			}
-			return false;
-		} catch (error) {
-			console.log("Error: ", error);
-			return false;
+		//try {
+		// 	if (ISSERVER) {
+		// 		return localStorage.getItem(item) === (cond || "true");
+		// 	}
+		// 	return false;
+		// } catch (error) {
+		// 	console.log("Error: ", error);
+		// 	return false;
+		// }
+		if (hasCookie(item)) {
+			return getCookie(item) === (cond || "true");
 		}
+		return item === "voiceAutoSpeak";
 	};
+
+	// const setItem(item, value){
+	// 	setCookie(item, value);
+	// }
 
 	const [isDarkMode, setIsDarkMode] = useState(theme === "dark" || false);
 	const [isChatAutoSpeak, setIsChatAutoSpeak] = useState(
@@ -46,8 +54,6 @@ export const SettingsProvider = ({ children }) => {
 		setIsDarkMode(checkItem("theme", "dark"));
 		setIsChatAutoSpeak(checkItem("chatAutoSpeak"));
 		setIsVoiceAutoSpeak(checkItem("voiceAutoSpeak"));
-		//console.log("init: ", localStorage.getItem("theme"));
-		//console.log(localStorage.getItem("theme") === "dark");
 		//}
 	}, []);
 
@@ -59,19 +65,22 @@ export const SettingsProvider = ({ children }) => {
 			html.setAttribute("data-theme", isDarkMode ? "dark" : "light");
 			html.classList.add(theme);
 
-			localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+			//localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+			setCookie("theme", isDarkMode ? "dark" : "light");
 			console.log("Theme set to: ", localStorage.getItem("theme"));
 		}
 	}, [theme]);
 
 	useEffect(() => {
-		if (typeof window !== "undefined" && isDarkMode !== null) {
-			localStorage.setItem("chatAutoSpeak", isChatAutoSpeak ? "true" : "false");
-			localStorage.setItem(
-				"voiceAutoSpeak",
-				isVoiceAutoSpeak ? "true" : "false"
-			);
-		}
+		// if (typeof window !== "undefined" && isDarkMode !== null) {
+		// 	localStorage.setItem("chatAutoSpeak", isChatAutoSpeak ? "true" : "false");
+		// 	localStorage.setItem(
+		// 		"voiceAutoSpeak",
+		// 		isVoiceAutoSpeak ? "true" : "false"
+		// 	);
+		// }
+		setCookie("chatAutoSpeak", isChatAutoSpeak ? "true" : "false");
+		setCookie("voiceAutoSpeak", isVoiceAutoSpeak ? "true" : "false");
 	}, [isChatAutoSpeak, isVoiceAutoSpeak]);
 
 	useEffect(() => {

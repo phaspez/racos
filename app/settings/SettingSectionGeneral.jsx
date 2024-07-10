@@ -13,8 +13,8 @@ export default function SettingSectionGeneral() {
 	} = useSettings();
 	return (
 		<SettingSection title={"Cài đặt chung"}>
-			<div className="p-2 grid grid-cols-1 gap-4">
-				<span className="flex gap-4">
+			<div className="p-2 grid grid-cols-1 gap-1">
+				<span className="flex py-4 px-2 gap-4 hover:bg-slate-400/20 bg-opacity-10 transition-all duration-150 rounded-md">
 					<label
 						className="text-black grow dark:text-white"
 						htmlFor="toggle-dark-mode"
@@ -29,7 +29,7 @@ export default function SettingSectionGeneral() {
 						onClick={() => setIsDarkMode(!isDarkMode)}
 					/>
 				</span>
-				<span className="flex gap-4">
+				<span className="flex py-4 px-2 gap-4 hover:bg-slate-400/20 bg-opacity-10 transition-all duration-150 rounded-md">
 					<label
 						className="text-black grow dark:text-white"
 						htmlFor="toggle-chat-speak"
@@ -44,7 +44,7 @@ export default function SettingSectionGeneral() {
 						onClick={() => setIsChatAutoSpeak(!isChatAutoSpeak)}
 					/>
 				</span>
-				<span className="flex gap-4">
+				<span className="flex py-4 px-2 gap-4 hover:bg-slate-400/20 bg-opacity-10 transition-all duration-150 rounded-md">
 					<label
 						className="text-black grow dark:text-white"
 						htmlFor="toggle-voice-speak"
