@@ -20,6 +20,7 @@ export default function RootLayout({ children }) {
 							{" "}
 						</div>
 						<NavBar />
+						<div className="py-10" />
 						{children}
 					</SettingsProvider>
 				</ThemeProvider>

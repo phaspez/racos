@@ -24,14 +24,14 @@ export default function SettingSectionGeneral() {
 					<input
 						type="checkbox"
 						id="toggle-dark-mode"
-						className="toggle toggle-info"
+						className="toggle bg-blue-700"
 						checked={isDarkMode}
 						onClick={() => setIsDarkMode(!isDarkMode)}
 					/>
 				</span>
 				<span className="flex py-4 px-2 gap-4 hover:bg-slate-400/20 bg-opacity-10 transition-all duration-150 rounded-md">
 					<label
-						className="text-black grow dark:text-white"
+						className="text-black grow h-max dark:text-white"
 						htmlFor="toggle-chat-speak"
 					>
 						Tự động nói trong Chat
@@ -39,7 +39,7 @@ export default function SettingSectionGeneral() {
 					<input
 						type="checkbox"
 						id="toggle-chat-speak"
-						className="toggle toggle-info"
+						className="toggle bg-blue-700"
 						checked={isChatAutoSpeak}
 						onClick={() => setIsChatAutoSpeak(!isChatAutoSpeak)}
 					/>
@@ -54,7 +54,7 @@ export default function SettingSectionGeneral() {
 					<input
 						type="checkbox"
 						id="toggle-voice-speak"
-						className="toggle toggle-info"
+						className="toggle bg-blue-700"
 						checked={isVoiceAutoSpeak}
 						onClick={() => setIsVoiceAutoSpeak(!isVoiceAutoSpeak)}
 					/>

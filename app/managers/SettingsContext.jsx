@@ -66,7 +66,9 @@ export const SettingsProvider = ({ children }) => {
 			html.classList.add(theme);
 
 			//localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-			setCookie("theme", isDarkMode ? "dark" : "light");
+			setCookie("theme", isDarkMode ? "dark" : "light", {
+				maxAge: 60 * 60 * 24 * 365,
+			});
 			console.log("Theme set to: ", localStorage.getItem("theme"));
 		}
 	}, [theme]);
@@ -79,8 +81,12 @@ export const SettingsProvider = ({ children }) => {
 		// 		isVoiceAutoSpeak ? "true" : "false"
 		// 	);
 		// }
-		setCookie("chatAutoSpeak", isChatAutoSpeak ? "true" : "false");
-		setCookie("voiceAutoSpeak", isVoiceAutoSpeak ? "true" : "false");
+		setCookie("chatAutoSpeak", isChatAutoSpeak ? "true" : "false", {
+			maxAge: 60 * 60 * 24 * 365,
+		});
+		setCookie("voiceAutoSpeak", isVoiceAutoSpeak ? "true" : "false", {
+			maxAge: 60 * 60 * 24 * 365,
+		});
 	}, [isChatAutoSpeak, isVoiceAutoSpeak]);
 
 	useEffect(() => {

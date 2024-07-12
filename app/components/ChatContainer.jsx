@@ -48,14 +48,20 @@ export default function ChatContainer() {
 
 	return (
 		<div className="w-full pt-0">
-			{messages.length === 0 ? <ChatGetStarted /> : null}
-			<div className="flex flex-col w-full pt-6 pb-24 mx-auto stretch px-10">
+			{messages.length === 0 ? <ChatGetStarted setInput={setInput} /> : null}
+			<div className="flex flex-col w-full pt-1 pb-20 stretch lg:px-20 md:px-10 px-5">
 				{messages.map((m) => (
-					<ChatResponse response={m} key={m.id} autoSpeak={isChatAutoSpeak} />
+					<ChatResponse
+						response={m}
+						key={m.id}
+						autoSpeak={isChatAutoSpeak}
+						isLoading={isLoading}
+					/>
 				))}
+				<div className="py-10" />
 			</div>
 
-			<div className="fixed w-full bottom-5 py-1 pt-1 -mb-5 bg-gradient-to-t from-white to-transparent dark:from-slate-900">
+			<div className="fixed overflow-hidden w-full bottom-5 py-1 pt-1 -mb-5 bg-gradient-to-t from-white to-transparent dark:from-slate-900">
 				<div className="lg:px-24 md:px-16 px-4">
 					<form onSubmit={handleSubmit}>
 						<div className="flex px-2 text-center text-wrap overflow-hidden align-middle justify-center">
@@ -74,7 +80,7 @@ export default function ChatContainer() {
 							<div className="relative text-xl flex flex-col px-2 overflow-hidden max-h-60 bg-background">
 								{isLoading ? ( // is loading
 									<div className="p-2 mt-2">
-										<span class="loading loading-dots loading-md"></span>
+										<span className="loading loading-dots text-black dark:text-white loading-md"></span>
 									</div>
 								) : (
 									<button

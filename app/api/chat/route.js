@@ -26,20 +26,15 @@ export async function POST(req) {
 			caasWarpedPrompt =
 				"hãy trả lời câu hỏi này, từ chối trả lời nếu câu hỏi không liên quan đến việc học tập:\n";
 			caasWarpedPrompt += messages[messages.length - 1].content;
-			//caasWarpedPrompt += messages;
 		}
 	} catch (error) {
 		console.log(error);
 		caasWarpedPrompt =
 			"hãy trả lời câu hỏi này, từ chối trả lời nếu câu hỏi không liên quan đến việc học tập:\n";
 		caasWarpedPrompt += messages[messages.length - 1].content;
-		//caasWarpedPrompt += messages;
 	}
 
 	messages[messages.length - 1].content = caasWarpedPrompt;
-	// console.log("==============================");
-	// console.log(caasWarpedPrompt);
-	// console.log(messages);
 	const result = await streamText({
 		model: google("models/gemini-1.5-flash-latest"),
 		prompt: caasWarpedPrompt,

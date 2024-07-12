@@ -6,7 +6,7 @@ export default function Home() {
 	return (
 		<ChatProvider>
 			<main className="p-0 m-0 flex-col items-center justify-between px-0 text-white dark:text-dark">
-				<div className="flex w-full h-screen justify-center px-0">
+				<div className="flex w-full justify-center px-0">
 					{/* <ChatGetStarted></ChatGetStarted> */}
 					<ChatContainer />
 				</div>

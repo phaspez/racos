@@ -3,16 +3,54 @@ import { ChatGetStartedPreviewPrompt } from "./ChatGetStartedPreviewPrompt";
 //import { useChat } from "../managers/chatContext";
 import Image from "next/image";
 import { useChat } from "ai/react";
+import { useEffect, useState } from "react";
+import { CiChat1 } from "react-icons/ci";
 
 export default function ChatGetStarted({ setInput }) {
 	//const { chatlog, inputText, setInputText } = useChat();
+	const [mounted, setMounted] = useState(false);
+	const [selected, setSelected] = useState([]);
 
 	let commonQuestions = [
 		"Bạn làm được gì?",
-		"Học phí của trường Đại Học Cần Thơ là bao nhiêu?",
-		"Trường Đại Học Cần Thơ có bao nhiêu ngành?",
-		"Điểm đầu vào của ngành Kế Toán là bao nhiêu?",
+		"Ngành Kỹ thuật máy tính là gì?",
+		"Điểm chuẩn ngành Kiến trúc là bao nhiêu?",
+		"Chỉ tiêu Kỹ thuật Phần mềm là bao nhiêu?",
+		"Ngành Công nghệ thông tin là gì?",
+		"Điều khiển và Tự động hóa là gì?",
+		"Cơ hội việc làm của ngành Kiểm toán?",
+		"Ngành Quản trị kinh doanh là gì?",
+		"Cơ hội việc làm của ngành Kiến trúc?",
+		"Chỉ tiêu tuyển sinh ngành Kỹ thuật xây dựng là bao nhiêu?",
 	];
+
+	const pickAndPopRandomElement = (arr) => {
+		// Ensure the array is not empty
+		if (arr.length === 0) {
+			throw new Error("Cannot pick from an empty array");
+		}
+
+		// Generate a random index
+		let randomIndex = Math.floor(Math.random() * arr.length);
+
+		// Remove and return the element at the random index
+		return arr.splice(randomIndex, 1)[0];
+	};
+
+	useEffect(() => {
+		console.log(setInput);
+		let selectedQuestions = [];
+		for (let i = 0; i < 4; i++) {
+			selectedQuestions.push(pickAndPopRandomElement([...commonQuestions]));
+		}
+		setSelected(selectedQuestions);
+
+		setMounted(true);
+	}, []);
+
+	if (!mounted) {
+		return null;
+	}
 
 	return (
 		<>
@@ -23,27 +61,28 @@ export default function ChatGetStarted({ setInput }) {
 				<Image
 					src="/robot_stand_and_look.png"
 					width={300}
-					height={400}
-					className="absolute right-0 bottom-0 -z-10 opacity-40"
+					height={200}
+					className="absolute right-0 bottom-10 -z-10 opacity-40"
 					alt="robot image"
 				/>
 				<h1 className="text-highlights text-extra-large">Xin chào!</h1>
 				<h1 className=" text-gray-600 dark:text-gray-300 text-extra-large opacity-30">
 					Tôi có thể giúp gì cho bạn?
 				</h1>
-				<div className="">
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-2">
-						{commonQuestions.map((question, index) => (
+				<div className="grid grid-cols-1 md:grid-cols-2">
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 p-2">
+						{selected.map((question, index) => (
 							<ChatGetStartedPreviewPrompt
 								prompt={question}
 								index={index}
 								setInput={setInput}
 								key={index}
+								icon={<CiChat1 />}
 							/>
 						))}
 					</div>
 				</div>
-				<div className=" h-36"></div>
+				<div className=" h-30"></div>
 			</div>
 		</>
 	);

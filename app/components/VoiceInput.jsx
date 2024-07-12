@@ -35,6 +35,7 @@ export default function VoiceInput({
 		useSpeechToText({ continuous: true, lang: "vi-VN" });
 	//const { speakText } = useTextToSpeech({ lang: "vi-VN" });
 	const buttonRef = useRef(null);
+	const cancelButton = useRef(null);
 
 	const startStopListening = async () => {
 		if (isListening) {
@@ -95,7 +96,7 @@ export default function VoiceInput({
 						className={
 							!(isListening && textInput.length == 0)
 								? "hidden"
-								: "text-lg text-opacity-60 font-light bg-white dark:bg-black dark:text-white rounded-lg shadow-md"
+								: "text-lg mb-5 text-opacity-60 font-light bg-white dark:bg-black dark:text-white rounded-lg shadow-md"
 						}
 					>
 						{isListening
@@ -109,39 +110,45 @@ export default function VoiceInput({
 				<div className="grid grid-cols-3 place-items-center">
 					<div>
 						<div className={isListening ? "" : "hidden"}>
-							<Button
+							<button
 								onClick={() => {
 									stopListening();
 									setTextInput("");
 								}}
 								color="transparent"
-								className="border-2 bg-red-500 rounded-full aspect-square hover:bg-red-700 text-white"
+								className="btn btn-circle border-2 flex justify-center bg-red-500 rounded-full aspect-square hover:bg-red-700 text-white"
 							>
 								<div className="w-full h-full grid items-center p-0 m-0">
-									<IoIosClose className="text-3xl" size={20} />
+									<p className="w-full flex justify-center text-center text-white">
+										<IoIosClose className="text-3xl" size={20} />
+									</p>
 								</div>
-							</Button>
+							</button>
 						</div>
 					</div>
-					<Button
+					<button
 						disabled={isLoading}
 						onClick={startStopListening}
 						ref={buttonRef}
 						color={isListening ? "red" : "blue"}
-						className="rounded-full w-20 m-1 aspect-square text-center align-middle"
+						className="btn btn-circle bg-blue-700 hover:bg-blue-800 btn-lg text-center align-middle"
 					>
-						<div className="w-full h-full grid items-center">
-							{!isLoading ? (
-								isListening ? (
-									<IoMdSend size={24} offset={[0, -100]} />
+						<div className="w-full text-center h-full grid items-center">
+							<p className="w-full flex justify-center text-center text-white">
+								{!isLoading ? (
+									isListening ? (
+										<IoMdSend size={24} offset={[0, -100]} />
+									) : (
+										<BiSolidMicrophone size={24} />
+									)
 								) : (
-									<BiSolidMicrophone size={24} />
-								)
-							) : (
-								<Spinner aria-label="Default status example" size={"lg"} />
-							)}
+									<div className="p-2 mt-2">
+										<span className="loading loading-dots text-black dark:text-white loading-md"></span>
+									</div>
+								)}
+							</p>
 						</div>
-					</Button>
+					</button>
 				</div>
 				<div className="p-1">
 					{" "}

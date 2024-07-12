@@ -8,12 +8,21 @@ import VoiceContainer from "../components/VoiceContainer";
 export default function Home() {
 	return (
 		<ChatProvider>
-			<div className="w-full bottom-5 py-1 pt-0 ">
-				<div className="">
+			<main className="p-0 m-0 flex-col items-center justify-between px-0 text-white dark:text-dark">
+				<div className="flex w-full justify-center px-0">
+					{/* <ChatGetStarted></ChatGetStarted> */}
 					<VoiceContainer />
-					<div className=" w-full h-30"></div>
 				</div>
-			</div>
+			</main>
 		</ChatProvider>
+
+		// <ChatProvider>
+		// 	<div className="w-full py-1 pt-0 ">
+		// 		<div className="">
+		// 			<VoiceContainer />
+		// 			<div className=" w-full h-30"></div>
+		// 		</div>
+		// 	</div>
+		// </ChatProvider>
 	);
 }

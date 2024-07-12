@@ -28,7 +28,7 @@ export default function VoiceContainer() {
 		<>
 			<div className="w-full pt-0">
 				{messages.length === 0 ? <ChatGetStarted /> : null}
-				<div className="flex flex-col w-full pt-6 pb-24 mx-auto stretch px-10">
+				<div className="flex flex-col w-full pt-6 pb-24 mx-auto stretch lg:px-20 md:px-10 px-5">
 					{messages.map((m) => (
 						<ChatResponse
 							response={m}
@@ -36,6 +36,7 @@ export default function VoiceContainer() {
 							autoSpeak={isVoiceAutoSpeak}
 						/>
 					))}
+					<div className="py-7" />
 				</div>
 			</div>
 			{/* voice input section */}
