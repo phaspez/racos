@@ -1,13 +1,11 @@
 "use client";
-import { ChatGetStartedPreviewPrompt } from "./ChatGetStartedPreviewPrompt";
-//import { useChat } from "../managers/chatContext";
+
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { CiChat1 } from "react-icons/ci";
 import { BiSolidMicrophone } from "react-icons/bi";
 
 export default function VoiceGetStarted() {
-	//const { chatlog, inputText, setInputText } = useChat();
 	const [mounted, setMounted] = useState(false);
 	const [selected, setSelected] = useState([]);
 
@@ -61,7 +59,7 @@ export default function VoiceGetStarted() {
 					src="/robot_stand_and_look.png"
 					width={300}
 					height={200}
-					className="absolute right-0 bottom-10 -z-10 opacity-40"
+					className="absolute right-0 bottom-10 -z-10 opacity-40 lg:opacity-100"
 					alt="robot image"
 				/>
 				<h1 className="text-highlights text-extra-large">Xin chào!</h1>
@@ -70,13 +68,13 @@ export default function VoiceGetStarted() {
 				</h1>
 				<p>Chỉ hỗ trợ trên Chrome và Edge</p>
 				<div className=" h-48 " />
-				<p className="flex gap-1 text-center text-black dark:text-white flex-wrap">
+				<div className="flex gap-1 text-center text-black dark:text-white flex-wrap">
 					<p className="self-center p-0 m-0">Nhấn vào</p>
 					<span className="rounded-full self-center bg-blue-700/80 text-white min-w-8 aspect-square">
 						<BiSolidMicrophone className="w-full h-full p-2" />{" "}
 					</span>{" "}
 					<p className="self-center  p-0 m-0">để bắt đầu.</p>
-				</p>
+				</div>
 			</div>
 		</>
 	);

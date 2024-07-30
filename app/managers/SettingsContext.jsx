@@ -6,42 +6,67 @@ import { setCookie, getCookie, hasCookie } from "cookies-next";
 
 const SettingsContext = createContext();
 
+export const modelType = [
+	{
+		key: "Gemini 1.5 Pro",
+		model: "models/gemini-1.5-pro-latest"
+	},
+	{
+		key: "Gemini 1.5 Flash",
+		model: "models/gemini-1.5-flash-latest"
+	},
+]
+
 export const SettingsProvider = ({ children }) => {
 	const { theme, setTheme } = useTheme();
 	const [mounted, setMounted] = useState(false);
+	const [modelId, setModelId] = useState(modelType[0].model);
 
 	const checkItem = (item, cond) => {
-		//try {
-		// 	if (ISSERVER) {
-		// 		return localStorage.getItem(item) === (cond || "true");
-		// 	}
-		// 	return false;
-		// } catch (error) {
-		// 	console.log("Error: ", error);
-		// 	return false;
-		// }
 		if (hasCookie(item)) {
 			return getCookie(item) === (cond || "true");
 		}
 		return item === "voiceAutoSpeak";
 	};
 
-	// const setItem(item, value){
-	// 	setCookie(item, value);
-	// }
+	const checkModel = () => {
+		if (hasCookie("model")){
+			return getCookie("model");
+		}
+		return modelType[0].model
+	}
+
+	const getCurrentModel = () => {
+		return modelId;
+	}
+
+	const getAllModel = () => {
+		return modelType;
+	}
+
+	const setModel = (newModel) => {
+		if (modelType.some((model) => model.model === newModel)){
+			setModelId(newModel);
+			setCookie("model", newModel, {
+				maxAge: 60 * 60 * 24 * 365
+			});
+		} else {
+			setModel("models/gemini-1.5-pro-latest");
+		}
+	}
 
 	const [isDarkMode, setIsDarkMode] = useState(theme === "dark" || false);
 	const [isChatAutoSpeak, setIsChatAutoSpeak] = useState(
 		checkItem("chatAutoSpeak")
 	);
+
 	const [isVoiceAutoSpeak, setIsVoiceAutoSpeak] = useState(
 		checkItem("voiceAutoSpeak")
 	);
-	// fast: "models/gemini-1.5-flash-latest"
-	// slow: "models/gemini-1.5-pro-latest"
-	const [modalOption, setModalOption] = useState(
-		"models/gemini-1.5-flash-latest"
-	);
+
+	// const [modalOption, setModalOption] = useState(
+	// 	"models/gemini-1.5-flash-latest"
+	// );
 
 	useEffect(() => {
 		setMounted(true);
@@ -54,7 +79,7 @@ export const SettingsProvider = ({ children }) => {
 		setIsDarkMode(checkItem("theme", "dark"));
 		setIsChatAutoSpeak(checkItem("chatAutoSpeak"));
 		setIsVoiceAutoSpeak(checkItem("voiceAutoSpeak"));
-		//}
+		setModelId(checkModel());
 	}, []);
 
 	useEffect(() => {
@@ -69,18 +94,11 @@ export const SettingsProvider = ({ children }) => {
 			setCookie("theme", isDarkMode ? "dark" : "light", {
 				maxAge: 60 * 60 * 24 * 365,
 			});
-			console.log("Theme set to: ", localStorage.getItem("theme"));
+			//console.log("Theme set to: ", localStorage.getItem("theme"));
 		}
 	}, [theme]);
 
 	useEffect(() => {
-		// if (typeof window !== "undefined" && isDarkMode !== null) {
-		// 	localStorage.setItem("chatAutoSpeak", isChatAutoSpeak ? "true" : "false");
-		// 	localStorage.setItem(
-		// 		"voiceAutoSpeak",
-		// 		isVoiceAutoSpeak ? "true" : "false"
-		// 	);
-		// }
 		setCookie("chatAutoSpeak", isChatAutoSpeak ? "true" : "false", {
 			maxAge: 60 * 60 * 24 * 365,
 		});
@@ -104,8 +122,11 @@ export const SettingsProvider = ({ children }) => {
 		setIsChatAutoSpeak,
 		isVoiceAutoSpeak,
 		setIsVoiceAutoSpeak,
-		modalOption,
-		setModalOption,
+		// modalOption,
+		// setModalOption,
+		getAllModel,
+		getCurrentModel,
+		setModel
 	};
 
 	if (!mounted) {

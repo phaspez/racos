@@ -1,13 +1,11 @@
 "use client";
 import { ChatGetStartedPreviewPrompt } from "./ChatGetStartedPreviewPrompt";
-//import { useChat } from "../managers/chatContext";
 import Image from "next/image";
 import { useChat } from "ai/react";
 import { useEffect, useState } from "react";
 import { CiChat1 } from "react-icons/ci";
 
 export default function ChatGetStarted({ setInput }) {
-	//const { chatlog, inputText, setInputText } = useChat();
 	const [mounted, setMounted] = useState(false);
 	const [selected, setSelected] = useState([]);
 
@@ -38,7 +36,6 @@ export default function ChatGetStarted({ setInput }) {
 	};
 
 	useEffect(() => {
-		console.log(setInput);
 		let selectedQuestions = [];
 		for (let i = 0; i < 4; i++) {
 			selectedQuestions.push(pickAndPopRandomElement([...commonQuestions]));
@@ -62,7 +59,7 @@ export default function ChatGetStarted({ setInput }) {
 					src="/robot_stand_and_look.png"
 					width={300}
 					height={200}
-					className="absolute right-0 bottom-10 -z-10 opacity-40"
+					className="absolute right-0 bottom-10 -z-10 opacity-40 lg:opacity-100"
 					alt="robot image"
 				/>
 				<h1 className="text-highlights text-extra-large">Xin chào!</h1>

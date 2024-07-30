@@ -7,27 +7,7 @@ export default function PromptInput({
 	input,
 	handleInputChange,
 }) {
-	//const { inputText, setInputText, appendChatlog, isLoading, setIsLoading } =
-	//	useChat();
-	//const { messages, input, handleInputChange, handleSubmit } = useChat();
 	const buttonRef = useRef(null);
-	//const [inputValue, setInputValue] = useState("");
-	//const [isLoading, setIsLoading] = useState(false);
-
-	// const handlePrompt = async (ev) => {
-	// 	// let response =
-	// 	// 	(await handleSendPrompt(inputText)) ||
-	// 	// 	"An error has occurred. Please try again";
-	// 	// if (response) {
-	// 	// 	setInputText("");
-	// 	// 	console.log(response);
-	// 	// 	appendChatlog(response.user, response.bot);
-	// 	// }
-	// 	ev.preventDefault();
-	// 	handleSubmit();
-	// 	//setIsLoading(false);
-	// 	console.log(messages);
-	// };
 
 	useEffect(() => {
 		const handleKeyDown = (event) => {

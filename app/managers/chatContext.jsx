@@ -4,6 +4,8 @@ import { useState, useEffect, useContext, createContext } from "react";
 
 const ChatContext = createContext();
 
+
+
 export const ChatProvider = ({ children }) => {
 	const [chatlog, setChatlog] = useState([]);
 	const [inputText, setInputText] = useState("");

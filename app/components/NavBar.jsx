@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 import { useSettings } from "../managers/SettingsContext";
 import { FaSun } from "react-icons/fa";
 import { FaMoon } from "react-icons/fa6";
@@ -88,13 +87,13 @@ export default function NavBar() {
 							alt="icons"
 						/>
 						<span className="self-center whitespace-nowrap text-xl font-semibold text-highlights">
-							CAAS
+							RACOS
 						</span>
 					</div>
 				</Link>
 			</div>
 			<div className="navbar-center hidden lg:flex">
-				<ul className="menu menu-horizontal px-1">
+				<ul className="menu menu-horizontal gap-2 px-1">
 					<li>
 						<Link href="/chat">
 							<IoChatbox />

@@ -18,7 +18,7 @@ export const useTextToSpeech = (options) => {
 		const loadVoices = () => {
 			const voicesList = speechSynthesisRef.current.getVoices();
 			setVoices(voicesList);
-			console.log(voicesList);
+			//console.log(voicesList);
 		};
 
 		// Load voices if they're available

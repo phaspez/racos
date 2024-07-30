@@ -7,14 +7,6 @@ import { useRef, useEffect } from "react";
 import { BiSolidMicrophone } from "react-icons/bi";
 import { IoIosClose } from "react-icons/io";
 
-// async function handleSendPrompt(prompt) {
-// 	// let result = await runTextPrompt(prompt);
-// 	// console.log(result);
-// 	// return {
-// 	// 	user: prompt,
-// 	// 	bot: result,
-// 	// };
-// }
 
 export default function VoiceInput({
 	textInput,
@@ -22,18 +14,8 @@ export default function VoiceInput({
 	submit,
 	isLoading,
 }) {
-	//const [textInput, setTextInput] = useState("");
-	// const {
-	// 	voiceAnswer,
-	// 	setVoiceAnswer,
-	// 	setVoiceQuestion,
-	// 	isLoading,
-	// 	setIsLoading,
-	// 	appendVoicelog,
-	// } = useChat();
 	const { isListening, transcript, startListening, stopListening } =
 		useSpeechToText({ continuous: true, lang: "vi-VN" });
-	//const { speakText } = useTextToSpeech({ lang: "vi-VN" });
 	const buttonRef = useRef(null);
 	const cancelButton = useRef(null);
 
@@ -43,18 +25,8 @@ export default function VoiceInput({
 				? textInput +
 				  (transcript.length ? (textInput.length ? " " : "") + transcript : "")
 				: textInput;
-			//setIsLoading(true);
-			// let res = await handleSendPrompt(text);
-			// if (res) {
-			// 	appendVoicelog(res.user, res.bot);
-			// 	// setVoiceAnswer(res.bot);
-			// 	// setVoiceQuestion(res.user);
-			// 	speakText(res.bot);
-			// }
-			//console.log(textInput);
 			submit({ role: "user", content: text });
 
-			//setIsLoading(false);
 			stopVoiceInput();
 		} else {
 			startListening();
@@ -151,15 +123,13 @@ export default function VoiceInput({
 					</button>
 				</div>
 				<div className="p-1">
-					{" "}
 					<p className="text-xs p-0 m-0 text-center gap-2">
 						<span className="hidden md:inline-block px-1">
 							<kbd className="kbd">Enter</kbd> hoặc{" "}
 							<kbd className="kbd">Space</kbd>
 							{" để ghi âm hoặc gửi."}
 						</span>
-						Thông tin có thể đưa ra không chính xác, hãy xác minh câu trả lời
-						của AI.
+						{"Thông tin có thể đưa ra không chính xác, hãy xác minh câu trả lời của AI."}
 					</p>
 				</div>
 			</div>

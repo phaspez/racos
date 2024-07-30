@@ -34,7 +34,7 @@ export default function ChatOptions({
 	}, [text]);
 
 	useEffect(() => {
-		console.log(role);
+		//console.log(role);
 	}, []);
 
 	const handleSpeak = () => {

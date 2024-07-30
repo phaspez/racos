@@ -9,6 +9,8 @@ import ChatGetStarted from "./ChatGetStarted";
 import { useSettings } from "../managers/SettingsContext";
 
 export default function ChatContainer() {
+	const { isChatAutoSpeak, getCurrentModel } = useSettings();
+	const model = getCurrentModel();
 	const {
 		messages,
 		input,
@@ -18,7 +20,6 @@ export default function ChatContainer() {
 		setInput,
 	} = useChat();
 	const buttonRef = useRef(null);
-	const { isChatAutoSpeak } = useSettings();
 	const [mounted, setMounted] = useState(false);
 
 	useEffect(() => {

@@ -39,63 +39,6 @@ export default function VoiceContainer() {
 					<div className="py-7" />
 				</div>
 			</div>
-			{/* voice input section */}
-			{/* <div className="fixed w-full bottom-0 bg-gradient-to-t text-black from-white to-transparent">
-				<div className="grid px-2 text-center text-wrap overflow-hidden place-items-center">
-					<div>
-						<p
-							className={
-								!(isListening && textInput.length == 0)
-									? "hidden"
-									: "text-lg text-opacity-60 font-light bg-white rounded-lg shadow-md"
-							}
-						>
-							{isListening
-								? textInput +
-								  (transcript.length
-										? (textInput.length ? " " : "") + transcript
-										: "")
-								: textInput}
-						</p>
-					</div>
-					<div className="grid grid-cols-3 place-items-center">
-						<div>
-							<div className={isListening ? "" : "hidden"}>
-								<Button
-									onClick={() => {
-										stopListening();
-										setTextInput("");
-									}}
-									color="transparent"
-									className="border-2 bg-red-500 rounded-full aspect-square hover:bg-red-700 text-white"
-								>
-									<div className="w-full h-full grid items-center p-0 m-0">
-										<IoIosClose className="text-3xl" size={20} />
-									</div>
-								</Button>
-							</div>
-						</div>
-						<Button
-							disabled={isLoading}
-							onClick={startStopListening}
-							color={isListening ? "red" : "blue"}
-							className="rounded-full w-20 m-1 aspect-square text-center align-middle"
-						>
-							<div className="w-full h-full grid items-center">
-								{!isLoading ? (
-									isListening ? (
-										<IoMdSend size={24} offset={[0, -100]} />
-									) : (
-										<BiSolidMicrophone size={24} />
-									)
-								) : (
-									<Spinner aria-label="Default status example" size={"lg"} />
-								)}
-							</div>
-						</Button>
-					</div>
-				</div>
-			</div> */}
 			<VoiceInput
 				textInput={input}
 				isLoading={isLoading}

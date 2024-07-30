@@ -13,7 +13,7 @@ function LoginComponent() {
         setLoading(true);
         try {
             const response = await login({ email, password });
-            console.log(response);
+            //console.log(response);
         } catch (err) {
             console.error('An error occurred:', err);
             setError('An error occurred');

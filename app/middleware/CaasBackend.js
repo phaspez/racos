@@ -5,8 +5,8 @@ import axios from "axios";
 
 // fetch userdata from server
 async function getUserInfo({ token }) {
-	console.log(process.env.BACKEND_URL + "/api/user/info");
-	console.log("logging in with ", token);
+	//console.log(process.env.BACKEND_URL + "/api/user/info");
+	//console.log("logging in with ", token);
 
 	const config = {
 		headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -29,8 +29,8 @@ async function getUserInfo({ token }) {
 }
 
 async function login({ email, password }) {
-	console.log(process.env.BACKEND_URL + "/api/user/login");
-	console.log("logging in with ", email, password);
+	//console.log(process.env.BACKEND_URL + "/api/user/login");
+	//console.log("logging in with ", email, password);
 
 	const response = await axios.post(
 		process.env.BACKEND_URL + "/api/user/login",
@@ -41,12 +41,12 @@ async function login({ email, password }) {
 	);
 
 	const data = response.data;
-	console.log(data);
+	//console.log(data);
 
 	// if login successfully, get user info and store in cookies
 	if (data.success) {
 		const res = await getUserInfo({ token: data.token });
-		console.log(res);
+		//console.log(res);
 		if (res.success) {
 			let data = {
 				token: data.token,

@@ -9,7 +9,7 @@ export const useSpeechToText = (options) => {
 	const recognitionRef = useRef(null);
 
 	useEffect(() => {
-		console.log(window);
+		//console.log(window);
 
 		if (!("webkitSpeechRecognition" in window)) {
 			setIsSpeechSupported("webkitSpeechRecognition" in window);

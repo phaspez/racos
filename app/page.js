@@ -8,12 +8,12 @@ export default function Home() {
 				<Image src={"/robot_wave_hand.png"} width={300} height={400}></Image>
 				<div className=" col-span-1 lg:col-span-3 text-highlights text-white grid grid-cols-1 text-left shrink place-content-start">
 					<h1 className="font-bold text-white text-8xl text-opacity-10 px-0">
-						CAAS
+						RACOS
 					</h1>
-					<h1 className="p-0 text-gray-600 text-extra-large opacity-30 px-0">
-						Chat-Voice Admissions Advisory Support
+					<h1 className="text-gray-600 text-extra-large opacity-30 px-0">
+						<u>R</u>outed Chat-Voice <u>A</u>dmissions <u>Co</u>unseling <u>S</u>upport
 					</h1>
-					<h1 className="p-0 text-gray-600 text-extra-large opacity-30 px-0">
+					<h1 className="text-gray-600 text-extra-large opacity-30 px-0">
 						Hệ thống tư vấn tuyển sinh CTU
 					</h1>
 					<div className="p-2"></div>
