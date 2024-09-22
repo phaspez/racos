@@ -1,7 +1,6 @@
 "use client";
 import { ChatGetStartedPreviewPrompt } from "./ChatGetStartedPreviewPrompt";
 import Image from "next/image";
-import { useChat } from "ai/react";
 import { useEffect, useState } from "react";
 import { CiChat1 } from "react-icons/ci";
 
@@ -38,7 +37,7 @@ export default function ChatGetStarted({ setInput }) {
 	useEffect(() => {
 		let selectedQuestions = [];
 		for (let i = 0; i < 4; i++) {
-			selectedQuestions.push(pickAndPopRandomElement([...commonQuestions]));
+			selectedQuestions.push(pickAndPopRandomElement(commonQuestions));
 		}
 		setSelected(selectedQuestions);
 
@@ -62,7 +61,7 @@ export default function ChatGetStarted({ setInput }) {
 					className="absolute right-0 bottom-10 -z-10 opacity-40 lg:opacity-100"
 					alt="robot image"
 				/>
-				<h1 className="text-highlights text-extra-large">Xin chào!</h1>
+				<h1 className="text-highlights text-extra-large w-max">Xin chào!</h1>
 				<h1 className=" text-gray-600 dark:text-gray-300 text-extra-large opacity-30">
 					Tôi có thể giúp gì cho bạn?
 				</h1>

@@ -7,41 +7,8 @@ import { BiSolidMicrophone } from "react-icons/bi";
 
 export default function VoiceGetStarted() {
 	const [mounted, setMounted] = useState(false);
-	const [selected, setSelected] = useState([]);
-
-	let commonQuestions = [
-		"Bạn làm được gì?",
-		"Ngành Kỹ thuật máy tính là gì?",
-		"Điểm chuẩn ngành Kiến trúc là bao nhiêu?",
-		"Chỉ tiêu Kỹ thuật Phần mềm là bao nhiêu?",
-		"Ngành Công nghệ thông tin là gì?",
-		"Điều khiển và Tự động hóa là gì?",
-		"Cơ hội việc làm của ngành Kiểm toán?",
-		"Ngành Quản trị kinh doanh là gì?",
-		"Cơ hội việc làm của ngành Kiến trúc?",
-		"Chỉ tiêu tuyển sinh ngành Kỹ thuật xây dựng là bao nhiêu?",
-	];
-
-	const pickAndPopRandomElement = (arr) => {
-		// Ensure the array is not empty
-		if (arr.length === 0) {
-			throw new Error("Cannot pick from an empty array");
-		}
-
-		// Generate a random index
-		let randomIndex = Math.floor(Math.random() * arr.length);
-
-		// Remove and return the element at the random index
-		return arr.splice(randomIndex, 1)[0];
-	};
 
 	useEffect(() => {
-		let selectedQuestions = [];
-		for (let i = 0; i < 4; i++) {
-			selectedQuestions.push(pickAndPopRandomElement([...commonQuestions]));
-		}
-		setSelected(selectedQuestions);
-
 		setMounted(true);
 	}, []);
 
@@ -62,7 +29,7 @@ export default function VoiceGetStarted() {
 					className="absolute right-0 bottom-10 -z-10 opacity-40 lg:opacity-100"
 					alt="robot image"
 				/>
-				<h1 className="text-highlights text-extra-large">Xin chào!</h1>
+				<h1 className="text-highlights text-extra-large w-max">Xin chào!</h1>
 				<h1 className=" text-gray-600 dark:text-gray-300 text-extra-large opacity-30">
 					Hãy hỏi để bắt đầu cuộc trò chuyện.
 				</h1>

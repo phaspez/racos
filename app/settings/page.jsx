@@ -10,7 +10,7 @@ export default function Home() {
 					<h1 className="font-bold text-extra-large text-opacity-10 px-0">
 						Cài đặt
 					</h1>
-					<div className="grid gap-4">
+					<div className="grid gap-4 w-full">
 						<SettingSectionGeneral />
 						<SettingSectionAdmin />
 					</div>

@@ -42,15 +42,15 @@
 }
 
 h1 {
-  @apply text-4xl font-bold p-2 text-black dark:text-white;
+  @apply text-4xl font-bold p-2 text-black;
 }
 
 h2 {
-  @apply text-3xl font-bold p-2 text-black dark:text-white;
+  @apply text-3xl font-bold p-2 text-black;
 }
 
 h4 {
-  @apply text-lg font-bold p-2 text-black dark:text-white;
+  @apply text-lg font-bold p-2 text-black;
 }
 
 p {
@@ -80,7 +80,7 @@ a {
 
 
 .text-highlights{
-  @apply bg-gradient-to-r from-teal-500 to-indigo-600 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-teal-500 to-indigo-600 bg-clip-text dark:from-rose-300 dark:to-sky-300;
 }
 
 

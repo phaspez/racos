@@ -87,7 +87,7 @@ export default function NavBar() {
 							alt="icons"
 						/>
 						<span className="self-center whitespace-nowrap text-xl font-semibold text-highlights">
-							RACOS
+							CAAS
 						</span>
 					</div>
 				</Link>

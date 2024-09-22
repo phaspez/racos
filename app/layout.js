@@ -4,8 +4,8 @@ import NavBar from "./components/NavBar";
 import { SettingsProvider } from "./managers/SettingsContext";
 import { ThemeProvider } from "next-themes";
 
-const inter = Inter({ subsets: ["latin"] });
 
+const inter = Inter({ subsets: ["latin"], weight: '500' });
 export const metadata = {
 	title: "CAAS",
 };
