@@ -63,7 +63,7 @@ async function sendPrompt({ prompt }) {
 
 async function uploadFile({ formData }){
 	const response = await axios.post(
-		process.env.BACKEND_URL + "/api/v1/user/upload", formData, 
+		process.env.NEXT_PUBLIC_BACKEND_URL + "/api/v1/user/upload", formData, 
 		{
 			headers: {
 				"Content-Type": "multipart/form-data",
@@ -76,7 +76,7 @@ async function uploadFile({ formData }){
 
 async function trainModel(){
 	const response = await axios.post(
-		process.env.BACKEND_URL + "/api/v1/user/train"
+		process.env.NEXT_PUBLIC_BACKEND_URL + "/api/v1/user/train"
 	);
 	const data = response.data;
 	return data;
