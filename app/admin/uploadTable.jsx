@@ -21,7 +21,7 @@ export default function UploadTable() {
 								<div className="mb-2 block">
 									<Label htmlFor="file-upload-dhct" value="Upload file" />
 								</div>
-								<FileInput id="file-upload-dhct" />
+								<input type="file" id="file-upload-dhct" className="file-input file-input-bordered file-input-info w-full max-w-xs" />
 							</div>
 						</Table.Cell>
 						<Table.Cell>

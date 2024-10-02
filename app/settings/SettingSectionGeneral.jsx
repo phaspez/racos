@@ -1,5 +1,6 @@
 import SettingSection from "./SettingSection";
 import { useSettings } from "../managers/SettingsContext";
+
 export default function SettingSectionGeneral() {
 	const {
 		isDarkMode,
@@ -22,6 +23,7 @@ export default function SettingSectionGeneral() {
 						Chế độ tối
 					</label>
 					<input
+						readOnly
 						type="checkbox"
 						id="toggle-dark-mode"
 						className="toggle bg-blue-700"
@@ -37,6 +39,7 @@ export default function SettingSectionGeneral() {
 						Tự động nói trong Chat
 					</label>
 					<input
+						readOnly
 						type="checkbox"
 						id="toggle-chat-speak"
 						className="toggle bg-blue-700"
@@ -52,6 +55,7 @@ export default function SettingSectionGeneral() {
 						Tự động nói trong Voice
 					</label>
 					<input
+						readOnly
 						type="checkbox"
 						id="toggle-voice-speak"
 						className="toggle bg-blue-700"
