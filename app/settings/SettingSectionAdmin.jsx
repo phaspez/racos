@@ -3,25 +3,51 @@
 import SettingSection from "./SettingSection";
 import Image from "next/image";
 import { useState } from "react";
-import {login} from "../middleware/CaasBackend";
+//import {login} from "../middleware/CaasBackend";
 import { toast } from 'react-toastify';
 import { useRouter } from "next/navigation";
+import axios from 'axios';
+
+async function login({ username, password }) {
+	const response = await axios.post(
+		process.env.NEXT_PUBLIC_BACKEND_URL + "/api/v1/user/login",
+		{
+			username: username,
+			password: password,
+		}
+	);
+	const data = response.data;
+	console.log(data);
+	if (data) {
+		localStorage.setItem("username", data.username);
+		localStorage.setItem("department", data.department);
+	}
+
+
+	return data;
+}
 
 export default function SettingSectionAdmin() {
-	const [email, setEmail] = useState("");
+	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const router = useRouter();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
+		const test = {
+			"password": password,
+			"username": username,
+		}
+		console.log(username);
+		console.log(password);
 		try {
-			await login({ email, password }).then(() => {
+			console.log(test);
+			await login(test).then((resp) => {
 				toast.success('Đăng nhập thành công');
 				router.push("/admin");
 			});
-			
 		} catch (error) {
+			console.error(error);
 			toast.error('Đăng nhập thất bại');
 		}
 	};
@@ -44,8 +70,8 @@ export default function SettingSectionAdmin() {
 							type="text"
 							className="grow w-full"
 							placeholder="Email"
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
+							value={username}
+							onChange={(e) => setUsername(e.target.value)}
 						/>
 					</label>
 					<label className="input w-full input-bordered flex items-center gap-2">
