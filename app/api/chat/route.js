@@ -1,43 +1,50 @@
 //import { google } from "@ai-sdk/google";
-import { streamText } from "ai";
-import { createGoogleGenerativeAI } from "@ai-sdk/google";
-import { sendPrompt } from "@/app/middleware/CaasBackend";
-import {console} from "next/dist/compiled/@edge-runtime/primitives";
+import { streamText } from "ai"
+import { createGoogleGenerativeAI } from "@ai-sdk/google"
+import { sendPrompt } from "@/app/middleware/CaasBackend"
 
-export const maxDuration = 60;
+export const maxDuration = 60
 
 export async function POST(req) {
-	"use server";
+	"use server"
 
 	const google = createGoogleGenerativeAI({
 		apiKey: process.env.API_KEY,
-	});
+	})
 
-	const { messages } = await req.json();
-	let caasWarpedPrompt = "xin chào!";
+	const { messages } = await req.json()
+	let caasWarpedPrompt = "xin chào!"
 	try {
 		const caasRes = await sendPrompt({
 			prompt: messages[messages.length - 1].content,
-		});
+		})
 
 		if (caasRes.success && caasRes.answer) {
-			caasWarpedPrompt = caasRes.answer;
+			caasWarpedPrompt = caasRes.answer
 		} else {
-			// caasWarpedPrompt =
-			// 	"hãy trả lời câu hỏi này, từ chối trả lời nếu câu hỏi không liên quan đến việc học tập:\n";
-			caasWarpedPrompt += messages[messages.length - 1].content;
+			caasWarpedPrompt += messages[messages.length - 1].content
 		}
 	} catch (error) {
-		//console.log(error);
-		// caasWarpedPrompt =
-		// 	"hãy trả lời câu hỏi này, từ chối trả lời nếu câu hỏi không liên quan đến việc học tập:\n";
-		caasWarpedPrompt += messages[messages.length - 1].content;
+		caasWarpedPrompt += messages[messages.length - 1].content
 	}
 
-	messages[messages.length - 1].content = caasWarpedPrompt;
-	const result = await streamText({
-		model: google("models/gemini-1.5-flash-latest"),
-		prompt: caasWarpedPrompt,
-	});
+	const processedMessages = [...messages]
+	processedMessages[processedMessages.length - 1].content = caasWarpedPrompt
 
-	return result.toAIStreamResponse();}
+	// Create properly formatted messages for Gemini
+	const formattedMessages = processedMessages.map((msg) => ({
+		role: msg.role === "user" ? "user" : "assistant",
+		content: msg.content,
+	}))
+
+	//messages[messages.length - 1].content = caasWarpedPrompt
+	const result = await streamText({
+		model: google("gemini-2.0-flash-lite"),
+		messages: formattedMessages,
+		//prompt: caasWarpedPrompt,
+	})
+
+	return result.toDataStreamResponse()
+
+	//return result.toAIStreamResponse()
+}

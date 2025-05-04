@@ -1,17 +1,20 @@
-import { Inter } from "next/font/google";
-import "./globals.css";
-import NavBar from "./components/NavBar";
-import { SettingsProvider } from "./managers/SettingsContext";
-import { ThemeProvider } from "next-themes";
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
+import { Inter } from "next/font/google"
+import "./globals.css"
+import NavBar from "./components/NavBar"
+import { SettingsProvider } from "./managers/SettingsContext"
+import { ThemeProvider } from "next-themes"
+import "react-toastify/dist/ReactToastify.css"
+import { ToastContainer } from "react-toastify"
+import Script from "next/script"
 
-const inter = Inter({ subsets: ["latin"], weight: '500' });
+const inter = Inter({ subsets: ["latin"], weight: "500" })
 export const metadata = {
 	title: "CAAS",
-};
+}
 
 export default function RootLayout({ children }) {
+	const isDev = process.env.NODE_ENV === "development"
+
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body className={inter.className}>
@@ -26,7 +29,13 @@ export default function RootLayout({ children }) {
 						<ToastContainer />
 					</SettingsProvider>
 				</ThemeProvider>
+				{isDev && (
+					<Script
+						src="https://cdn.jsdelivr.net/npm/react-scan/dist/auto.global.js"
+						strategy="beforeInteractive"
+					/>
+				)}
 			</body>
 		</html>
-	);
+	)
 }

@@ -4,11 +4,11 @@
 		content: String
 	}
 */
-import { FaUser } from "react-icons/fa";
-import { RiRobot2Fill } from "react-icons/ri";
-import Markdown from "react-markdown";
-import rehypeRaw from "rehype-raw";
-import ChatOptions from "./ChatOptions";
+import { FaUser } from "react-icons/fa"
+import { RiRobot2Fill } from "react-icons/ri"
+import Markdown from "react-markdown"
+import rehypeRaw from "rehype-raw"
+import ChatOptions from "./ChatOptions"
 
 export default function ChatResponse({
 	response,
@@ -16,6 +16,7 @@ export default function ChatResponse({
 	autoSpeak,
 	isLoading,
 }) {
+	console.log("ChatResponse", response)
 	return (
 		<div className="text-black grid grid-cols-1 gap-4 py-4">
 			{response.role === "user" ? (
@@ -60,5 +61,5 @@ export default function ChatResponse({
 				</div>
 			)}
 		</div>
-	);
+	)
 }

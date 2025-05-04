@@ -1,16 +1,15 @@
-"use client";
+"use client"
 
-import { useChat } from "ai/react";
-import ChatResponse from "./ChatResponse";
-import Textarea from "react-textarea-autosize";
-import { IoMdSend } from "react-icons/io";
-import { useEffect, useRef, useState } from "react";
-import ChatGetStarted from "./ChatGetStarted";
-import { useSettings } from "../managers/SettingsContext";
+import { useChat } from "ai/react"
+import ChatResponse from "./ChatResponse"
+import Textarea from "react-textarea-autosize"
+import { IoMdSend } from "react-icons/io"
+import { useEffect, useRef, useState } from "react"
+import ChatGetStarted from "./ChatGetStarted"
+import { useSettings } from "../managers/SettingsContext"
 
 export default function ChatContainer() {
-	const { isChatAutoSpeak, getCurrentModel } = useSettings();
-	const model = getCurrentModel();
+	const { isChatAutoSpeak, getCurrentModel } = useSettings()
 	const {
 		messages,
 		input,
@@ -18,33 +17,33 @@ export default function ChatContainer() {
 		handleSubmit,
 		isLoading,
 		setInput,
-	} = useChat();
-	const buttonRef = useRef(null);
-	const [mounted, setMounted] = useState(false);
+	} = useChat()
+	const buttonRef = useRef(null)
+	const [mounted, setMounted] = useState(false)
 
 	useEffect(() => {
 		const handleKeyDown = (event) => {
 			if (event.shiftKey && event.key === "Enter") {
-				event.preventDefault();
+				event.preventDefault()
 				if (buttonRef.current) {
-					buttonRef.current.click();
+					buttonRef.current.click()
 				}
 			}
-		};
+		}
 
-		document.addEventListener("keydown", handleKeyDown);
+		document.addEventListener("keydown", handleKeyDown)
 
 		return () => {
-			document.removeEventListener("keydown", handleKeyDown);
-		};
-	}, []);
+			document.removeEventListener("keydown", handleKeyDown)
+		}
+	}, [])
 
 	useEffect(() => {
-		setMounted(true);
-	}, []);
+		setMounted(true)
+	}, [])
 
 	if (!mounted) {
-		return null;
+		return null
 	}
 
 	return (
@@ -108,5 +107,5 @@ export default function ChatContainer() {
 				</div>
 			</div>
 		</div>
-	);
+	)
 }
