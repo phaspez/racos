@@ -1,51 +1,51 @@
-"use client";
-import { ChatGetStartedPreviewPrompt } from "./ChatGetStartedPreviewPrompt";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { CiChat1 } from "react-icons/ci";
+"use client"
+import { ChatGetStartedPreviewPrompt } from "./ChatGetStartedPreviewPrompt"
+import Image from "next/image"
+import { useEffect, useState } from "react"
+import { CiChat1 } from "react-icons/ci"
 
 export default function ChatGetStarted({ setInput }) {
-	const [mounted, setMounted] = useState(false);
-	const [selected, setSelected] = useState([]);
+	const [mounted, setMounted] = useState(false)
+	const [selected, setSelected] = useState([])
 
 	let commonQuestions = [
 		"Bạn làm được gì?",
 		"Ngành Kỹ thuật máy tính là gì?",
 		"Điểm chuẩn ngành Kiến trúc là bao nhiêu?",
-		"Chỉ tiêu Kỹ thuật Phần mềm là bao nhiêu?",
+		"Điểm chuẩn Kỹ thuật Phần mềm là bao nhiêu?",
 		"Ngành Công nghệ thông tin là gì?",
 		"Điều khiển và Tự động hóa là gì?",
 		"Cơ hội việc làm của ngành Kiểm toán?",
-		"Ngành Quản trị kinh doanh là gì?",
+		"Ngành An toàn thông tin là gì?",
 		"Cơ hội việc làm của ngành Kiến trúc?",
-		"Chỉ tiêu tuyển sinh ngành Kỹ thuật xây dựng là bao nhiêu?",
-	];
+		"Chỉ tiêu tuyển sinh ngành Kỹ thuật phần mềm là bao nhiêu?",
+	]
 
 	const pickAndPopRandomElement = (arr) => {
 		// Ensure the array is not empty
 		if (arr.length === 0) {
-			throw new Error("Cannot pick from an empty array");
+			throw new Error("Cannot pick from an empty array")
 		}
 
 		// Generate a random index
-		let randomIndex = Math.floor(Math.random() * arr.length);
+		let randomIndex = Math.floor(Math.random() * arr.length)
 
 		// Remove and return the element at the random index
-		return arr.splice(randomIndex, 1)[0];
-	};
+		return arr.splice(randomIndex, 1)[0]
+	}
 
 	useEffect(() => {
-		let selectedQuestions = [];
+		let selectedQuestions = []
 		for (let i = 0; i < 4; i++) {
-			selectedQuestions.push(pickAndPopRandomElement(commonQuestions));
+			selectedQuestions.push(pickAndPopRandomElement(commonQuestions))
 		}
-		setSelected(selectedQuestions);
+		setSelected(selectedQuestions)
 
-		setMounted(true);
-	}, []);
+		setMounted(true)
+	}, [])
 
 	if (!mounted) {
-		return null;
+		return null
 	}
 
 	return (
@@ -81,5 +81,5 @@ export default function ChatGetStarted({ setInput }) {
 				<div className=" h-30"></div>
 			</div>
 		</>
-	);
+	)
 }
