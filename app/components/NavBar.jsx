@@ -1,13 +1,13 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import Image from "next/image";
-import { useSettings } from "../managers/SettingsContext";
-import { FaSun } from "react-icons/fa";
-import { FaMoon } from "react-icons/fa6";
-import { FaMicrophone } from "react-icons/fa";
-import { IoChatbox } from "react-icons/io5";
-import { IoMdSettings } from "react-icons/io";
+import Link from "next/link"
+import Image from "next/image"
+import { useSettings } from "../managers/SettingsContext"
+import { FaSun } from "react-icons/fa"
+import { FaMoon } from "react-icons/fa6"
+import { FaMicrophone } from "react-icons/fa"
+import { IoChatbox } from "react-icons/io5"
+import { IoMdSettings } from "react-icons/io"
 
 const customTheme = {
 	root: {
@@ -28,10 +28,10 @@ const customTheme = {
 			},
 		},
 	},
-};
+}
 
 export default function NavBar() {
-	const { isDarkMode, setIsDarkMode } = useSettings();
+	const { isDarkMode, setIsDarkMode } = useSettings()
 
 	return (
 		//<nav className="sticky top-0 z-10">
@@ -81,9 +81,10 @@ export default function NavBar() {
 				<Link href="/">
 					<div className="flex p-2 hover:bg-gray-300 hover:dark:bg-gray-700 rounded-md transition-all duration-150">
 						<Image
+							className="mr-4"
 							width="32"
 							height="32"
-							src="https://img.icons8.com/external-basicons-color-edtgraphics/50/external-Drop-abstract-basicons-color-edtgraphics.png"
+							src="/logo.png"
 							alt="icons"
 						/>
 						<span className="self-center whitespace-nowrap text-xl font-semibold text-highlights">
@@ -124,5 +125,5 @@ export default function NavBar() {
 			</div>
 		</nav>
 		//</nav>
-	);
+	)
 }

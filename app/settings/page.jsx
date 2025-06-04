@@ -1,6 +1,16 @@
-"use client";
-import SettingSectionAdmin from "./SettingSectionAdmin";
-import SettingSectionGeneral from "./SettingSectionGeneral";
+"use client"
+import SettingSectionAdmin from "./SettingSectionAdmin"
+import SettingSectionGeneral from "./SettingSectionGeneral"
+
+// export const metadata = {
+// 	title: "Settings | CAAS",
+// 	description: "Settings | CAAS - Chat-Voice Admissions Advisory Support",
+// 	openGraph: {
+// 		title: "Settings | CAAS",
+// 		description: "Settings | CAAS - Chat-Voice Admissions Advisory Support",
+// 		type: "website",
+// 	},
+// }
 
 export default function Home() {
 	return (
@@ -17,5 +27,5 @@ export default function Home() {
 				</div>
 			</div>
 		</main>
-	);
+	)
 }

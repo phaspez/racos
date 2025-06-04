@@ -9,7 +9,12 @@ import Script from "next/script"
 
 const inter = Inter({ subsets: ["latin"], weight: "500" })
 export const metadata = {
-	title: "CAAS",
+	title: "CAAS | Chat-Voice Admissions Advisory Support",
+	openGraph: {
+		title: "CAAS | Chat-Voice Admissions Advisory Support",
+		description: "Hệ thống tư vấn tuyển sinh CTU",
+		type: "website",
+	},
 }
 
 export default function RootLayout({ children }) {

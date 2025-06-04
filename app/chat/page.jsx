@@ -1,6 +1,15 @@
-"use client";
-import { ChatProvider } from "../managers/chatContext";
-import ChatContainer from "../components/ChatContainer";
+import { ChatProvider } from "../managers/chatContext"
+import ChatContainer from "../components/ChatContainer"
+
+export const metadata = {
+	title: "Chat | CAAS",
+	description: "Chat with CAAS - Chat-Voice Admissions Advisory Support",
+	openGraph: {
+		title: "Chat | CAAS",
+		description: "Chat with CAAS - Chat-Voice Admissions Advisory Support",
+		type: "website",
+	},
+}
 
 export default function Home() {
 	return (
@@ -12,5 +21,5 @@ export default function Home() {
 				</div>
 			</main>
 		</ChatProvider>
-	);
+	)
 }
